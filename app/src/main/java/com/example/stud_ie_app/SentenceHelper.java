@@ -11,22 +11,21 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class WordHelper {
+public class SentenceHelper {
 
-    public static final String BASE_URL = "https://wordsapiv1.p.rapidapi.com/words/";
+    public static final String BASE_URL = "https://od-api.oxforddictionaries.com/api/v1/";
 
-
-    public static WordApi getWord() throws ExecutionException, InterruptedException {
-        GetWordTask getWordTask = new GetWordTask();
-        return getWordTask.execute().get();
+    public static OxfordDictionaryApi getSentence(String word) throws ExecutionException, InterruptedException {
+        SentenceHelper.GetSentenceTask getSentenceTask = new SentenceHelper.GetSentenceTask();
+        return getSentenceTask.execute(word).get();
     }
 
-    private static class GetWordTask extends AsyncTask<Void, Void, WordApi> {
+    private static class GetSentenceTask extends AsyncTask<String, Void, OxfordDictionaryApi> {
+
 
         @Override
-        protected WordApi doInBackground(Void... voids) {
-
-            WordApi result = null;
+        protected OxfordDictionaryApi doInBackground(String... strings) {
+            OxfordDictionaryApi result = null;
 
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -38,8 +37,8 @@ public class WordHelper {
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 
-            WordsApiClient service = retrofit.create(WordsApiClient.class);
-            Call<WordApi> call = service.getRandomWord();
+            OxfordDictionaryClient service = retrofit.create(OxfordDictionaryClient.class);
+            Call<OxfordDictionaryApi> call = service.getSentence(strings[0]);
 
             try {
                 result = call.execute().body();
@@ -50,9 +49,8 @@ public class WordHelper {
         }
 
         @Override
-        protected void onPostExecute(WordApi wordApi) {
+        protected void onPostExecute(OxfordDictionaryApi oxfordDictionaryApi) {
             System.out.println("In post execute");
-            System.out.printf(wordApi.toString());
         }
     }
 

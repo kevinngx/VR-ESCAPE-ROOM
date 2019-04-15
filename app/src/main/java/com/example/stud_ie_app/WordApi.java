@@ -1,14 +1,14 @@
 package com.example.stud_ie_app;
 
-public class WordResult {
+public class WordApi {
 
     String word;
     Syllables syllables;
 
-    public WordResult() {
+    public WordApi() {
     }
 
-    public WordResult(String word, Syllables syllables) {
+    public WordApi(String word, Syllables syllables) {
         this.word = word;
         this.syllables = syllables;
     }
@@ -31,7 +31,7 @@ public class WordResult {
 
     @Override
     public String toString() {
-        return "WordResult{" +
+        return "WordApi{" +
                 "word='" + word + '\'' +
                 ", syllables=" + syllables +
                 '}';
