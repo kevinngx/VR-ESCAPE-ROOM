@@ -34,17 +34,11 @@ public class MainActivity extends AppCompatActivity {
 
         System.out.println("Result is found!");
 
-    System.out.println("LOG 1");
-
-    System.out.println("LOG 2");
         wordText.setText(wordApi.getWord());
-    System.out.println("LOG 3");
         String sentence = oxfordDictionaryApi.getSentencesList().get(0).text;
-    System.out.println("LOG 4");
         System.out.println(sentence);
-    System.out.println("LOG 5");
         sentenceView.setText(sentence);
-    System.out.println("LOG 6");
+
 
 
     }
