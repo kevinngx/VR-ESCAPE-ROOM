@@ -1,5 +1,6 @@
 package com.example.stud_ie_app;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -20,26 +21,24 @@ public class MainActivity extends AppCompatActivity {
 
     public void onButtonPress(View view) throws ExecutionException, InterruptedException {
 
-        TextView wordText = findViewById(R.id.wordText);
-        TextView sentenceView = findViewById(R.id.sentenceText);
+//        TextView wordText = findViewById(R.id.wordText);
+//        TextView sentenceView = findViewById(R.id.sentenceText);
+//
+//        WordApi wordApi = WordHelper.getWord();
+//        OxfordDictionaryApi oxfordDictionaryApi = SentenceHelper.getSentence(wordApi.getWord());
+//
+//        while (oxfordDictionaryApi == null) {
+//            wordApi = WordHelper.getWord();
+//            oxfordDictionaryApi = SentenceHelper.getSentence(wordApi.getWord());
+//        }
+//
+//        wordText.setText(wordApi.getWord());
+//        String sentence = oxfordDictionaryApi.getSentencesList().get(0).text;
+//        System.out.println(sentence);
+//        sentenceView.setText(sentence);
 
-        WordApi wordApi = WordHelper.getWord();
-        OxfordDictionaryApi oxfordDictionaryApi = SentenceHelper.getSentence(wordApi.getWord());
-
-        while (oxfordDictionaryApi == null) {
-            System.out.println("Null result, searching again");
-            wordApi = WordHelper.getWord();
-            oxfordDictionaryApi = SentenceHelper.getSentence(wordApi.getWord());
-        }
-
-        System.out.println("Result is found!");
-
-        wordText.setText(wordApi.getWord());
-        String sentence = oxfordDictionaryApi.getSentencesList().get(0).text;
-        System.out.println(sentence);
-        sentenceView.setText(sentence);
-
-
+        Intent intent = new Intent(this, LevelSelectActivity.class);
+        startActivity(intent);
 
     }
 
