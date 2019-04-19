@@ -37,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
 //        System.out.println(sentence);
 //        sentenceView.setText(sentence);
 
-        Intent intent = new Intent(this, LevelSelectActivity.class);
+//        Intent intent = new Intent(this, LevelSelectActivity.class);
+        Intent intent = new Intent(this, OnboardingActivity.class);
         startActivity(intent);
 
     }
