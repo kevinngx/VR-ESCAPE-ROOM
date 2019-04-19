@@ -32,8 +32,8 @@ public class RegistrationActivity extends AppCompatActivity {
                 newUsername.getText(), newPasswordOne.getText(), newPasswordTwo.getText()));
 
         Intent intent = new Intent(this, RegistrationTwoActivity.class);
-        intent.putExtra(NEW_USERNAME, newUsername.getText());
-        intent.putExtra(NEW_PASSWORD, newPasswordOne.getText());
+        intent.putExtra(NEW_USERNAME, newUsername.getText().toString());
+        intent.putExtra(NEW_PASSWORD, newPasswordOne.getText().toString());
         startActivity(intent);
     }
 

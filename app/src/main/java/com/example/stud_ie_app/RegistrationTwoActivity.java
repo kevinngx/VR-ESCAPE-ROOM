@@ -12,6 +12,7 @@ public class RegistrationTwoActivity extends AppCompatActivity {
     TextView id_username;
     String newUsername;
     String newPassword;
+    int newAvatar = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +26,8 @@ public class RegistrationTwoActivity extends AppCompatActivity {
 
         newUsername = bundle.getString(RegistrationActivity.NEW_USERNAME);
         newPassword = bundle.getString(RegistrationActivity.NEW_PASSWORD);
-        System.out.println("username is: " + newUsername);
 
+        System.out.println("username is: " + newUsername);
         id_username.setText(newUsername);
 
     }
@@ -48,16 +49,16 @@ public class RegistrationTwoActivity extends AppCompatActivity {
                 {R.id.avatar_eight, R.drawable.avatar8}
         };
 
-        int i = 0;
-        while (i < avatars.length) {
-            if (view.getId() == avatars[i][0])
+        newAvatar = 0;
+        while (newAvatar < avatars.length) {
+            if (view.getId() == avatars[newAvatar][0])
                 break;
-            i++;
+            newAvatar++;
         }
-        System.out.println("Selected avatar: " + i);
+        System.out.println("Selected avatar: " + newAvatar);
 
         // Update Employee id_card
-        id_image.setImageResource(avatars[i][1]);
+        id_image.setImageResource(avatars[newAvatar][1]);
 
 
     }
@@ -67,7 +68,7 @@ public class RegistrationTwoActivity extends AppCompatActivity {
 //        System.out.println(String.format("LOGIN DETAILS PASSED \nUsername: %s \nPassword: %s \nPasswrod: %s",
 //                newUsername.getText(), newPasswordOne.getText(), newPasswordTwo.getText()));
 
-        Intent intent = new Intent(this, DashboardActivity.class);
+        Intent intent = new Intent(this, OnboardingActivity.class);
         startActivity(intent);
     }
 

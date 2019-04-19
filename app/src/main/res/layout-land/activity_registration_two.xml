@@ -13,9 +13,9 @@
         android:layout_marginTop="16dp"
         android:text="Sign up"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/signup_message"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/signup_message"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -37,18 +37,18 @@
         android:id="@+id/loginButton"
         android:layout_width="262dp"
         android:layout_height="43dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
         android:clickable="true"
         android:onClick="onSubmitButtonPress"
         android:text="Button"
         app:cardBackgroundColor="#293D58"
         app:cardCornerRadius="25dp"
         app:cardElevation="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/employee_id">
+        app:layout_constraintBottom_toBottomOf="@+id/employee_id"
+        app:layout_constraintEnd_toEndOf="@+id/gridLayout"
+        app:layout_constraintStart_toStartOf="@+id/gridLayout"
+        app:layout_constraintTop_toBottomOf="@+id/gridLayout"
+        app:layout_constraintVertical_bias="0.0">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -68,18 +68,19 @@
 
     <GridLayout
         android:id="@+id/gridLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="223dp"
+        android:layout_height="223dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="64dp"
+        android:layout_marginBottom="8dp"
         android:alignmentMode="alignMargins"
         android:columnCount="3"
         android:columnOrderPreserved="false"
         android:rowCount="3"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signup_message">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <android.support.v7.widget.CardView
             android:id="@+id/avatar_zero"
@@ -282,6 +283,7 @@
         app:cardCornerRadius="20dp"
         app:cardElevation="10dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2">
 
@@ -327,12 +329,10 @@
         android:id="@+id/employee_id"
         android:layout_width="246dp"
         android:layout_height="78dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gridLayout">
+        app:layout_constraintEnd_toEndOf="@+id/signup_message"
+        app:layout_constraintStart_toStartOf="@+id/signup_message"
+        app:layout_constraintTop_toBottomOf="@+id/signup_message">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
