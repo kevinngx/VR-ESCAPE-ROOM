@@ -57,6 +57,22 @@
         app:layout_constraintTop_toTopOf="@+id/dotsLayout" />
 
     <Button
+        android:id="@+id/startButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@android:color/transparent"
+        android:onClick="onStartButtonPress"
+        android:text="START"
+        android:textColor="@color/cardview_light_background"
+        app:layout_constraintBottom_toBottomOf="@+id/dotsLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toEndOf="@+id/dotsLayout"
+        app:layout_constraintTop_toTopOf="@+id/dotsLayout" />
+
+    <Button
         android:id="@+id/previousButton"
         android:layout_width="86dp"
         android:layout_height="48dp"

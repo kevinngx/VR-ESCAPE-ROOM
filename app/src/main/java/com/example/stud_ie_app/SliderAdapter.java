@@ -22,11 +22,11 @@ public class SliderAdapter extends PagerAdapter {
     }
 
     public int[] slideImages = {
-            //TODO: Replace these with actual photos
-            R.drawable.placeholder1,
-            R.drawable.placeholder2,
-            R.drawable.placeholder3,
-            R.drawable.placeholder1
+            R.drawable.onboarding_welcome,
+            R.drawable.onboarding_learn,
+            R.drawable.onboarding_grow,
+            R.drawable.onboarding_compete,
+            R.drawable.onboarding_start
     };
 
     public String[] slideHeadings = {
@@ -34,18 +34,34 @@ public class SliderAdapter extends PagerAdapter {
             "Learn",
             "Grow",
             "Compete",
+            "Get Started"
     };
 
     public String[] slideDescriptions = {
-            "Stud.ie is a quiz app that will test your mastery over the english language.",
-            "Here you will be tested on your knowledge of english grammar. Each question will " +
-                    "present you with a sentence with a missing word. It is your job to find the " +
-                    "missing word. Match it correctly to build your compendium of words.",
-            "As your knowledge base increases, you will gain experience points and level up, " +
-                    "climbing the corporate ladder, and unlocking new levels that will reap even" +
-                    "more experience points.",
-            "It doesn't stop there, track your performance against other wordsmiths around the " +
-                    "world.",
+            // Welcome
+            "Hi there! I'm Adam Chew, the CEO of Stud.ie. Welcome to our quiz app! " +
+                    "\n\nWe have introduced this app as a new way to assess our new employees and " +
+                    "their potential for promotion.",
+
+            // Learn
+            "Here you will be tested on your knowledge of english grammar. " +
+                    "\n\nEach question of the quiz will present you with a sentence with a missing word. I" +
+                    "t is your job to find the missing word",
+
+            // Grow
+            "Get these questions right to build your your knowledge base increases your experience." +
+                    "\n\nGain enough experience points, and we may even consider you for promotion." +
+                    "\n\nAs you climb the corporate ladder, you will unlock even more levels to test" +
+                    "your skills! These levels will provide even more challenge and experience.",
+
+            // Compete
+            "We are a global company so there will be other employees around the world also" +
+                    "pushing to climb the corporate ladder here at Stud.ie. " +
+                    "\n\nTrack your performance against other wordsmiths around the world, " +
+                    "and compete with them to see who is the top wordsmith of Stud.ie",
+
+            // Get Started!
+            "So what are you waiting for? Press the button below to get started!"
     };
 
 

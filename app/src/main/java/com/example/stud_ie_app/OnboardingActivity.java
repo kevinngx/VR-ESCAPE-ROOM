@@ -1,14 +1,19 @@
 package com.example.stud_ie_app;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.util.concurrent.ExecutionException;
 
 public class OnboardingActivity extends AppCompatActivity {
 
@@ -18,9 +23,11 @@ public class OnboardingActivity extends AppCompatActivity {
     private SliderAdapter mSliderAdapter;
 
     // Navigation Buttons
+    private Button startButton;
     private Button nextButton;
     private Button previousButton;
     private int currentPage;
+    Animation btnAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +41,16 @@ public class OnboardingActivity extends AppCompatActivity {
         mSlideViewPager.setAdapter(mSliderAdapter);
 
         addDotsIndicator(0);
-
         mSlideViewPager.addOnPageChangeListener(viewListener);
 
+        // Setting up navigation buttons
 
         nextButton = (Button) findViewById(R.id.nextButton);
         previousButton = (Button) findViewById(R.id.previousButton);
+        startButton = (Button) findViewById(R.id.startButton);
+        startButton.setEnabled(false);
+        startButton.setVisibility(View.INVISIBLE);
+        btnAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.button_animation);
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,12 +67,21 @@ public class OnboardingActivity extends AppCompatActivity {
 
             }
         });
+    }
 
+    public void onStartButtonPress(View view) {
+
+        if (currentPage == (mDots.length - 1)) {
+
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+
+        }
 
     }
 
     public void addDotsIndicator(int position) {
-        mDots = new TextView[4];
+        mDots = new TextView[5];
         mDotLayout.removeAllViews();
 
         for (int i = 0; i < mDots.length; i++) {
@@ -83,6 +103,7 @@ public class OnboardingActivity extends AppCompatActivity {
         @Override
         public void onPageScrolled(int i, float v, int i1) {
 
+
         }
 
         @Override
@@ -92,30 +113,45 @@ public class OnboardingActivity extends AppCompatActivity {
 
             if (i == 0) {
 
+                // Next Button
                 nextButton.setEnabled(true);
+                nextButton.setVisibility(View.VISIBLE);
+
+                // Previous Button
                 previousButton.setEnabled(false);
                 previousButton.setVisibility(View.INVISIBLE);
 
-                nextButton.setText("Next");
-                previousButton.setText("");
+                // Setup start button
+                startButton.setEnabled(false);
+                startButton.setVisibility(View.INVISIBLE);
 
             } else if (i == (mDots.length - 1)) {
 
-                nextButton.setEnabled(true);
+                // Next Button
+                nextButton.setEnabled(false);
+                nextButton.setVisibility(View.INVISIBLE);
+
+                // Preivous Button
                 previousButton.setEnabled(true);
                 previousButton.setVisibility(View.VISIBLE);
 
-                nextButton.setText("Start!");
-                previousButton.setText("Back");
+                // Setup start button
+                startButton.setEnabled(true);
+                startButton.setVisibility(View.VISIBLE);
+                startButton.setAnimation(btnAnimation);
 
             } else {
 
+                // Next Button
                 nextButton.setEnabled(true);
+                nextButton.setVisibility(View.VISIBLE);
+
                 previousButton.setEnabled(true);
                 previousButton.setVisibility(View.VISIBLE);
 
-                nextButton.setText("Next");
-                previousButton.setText("Back");
+                // Setup start button
+                startButton.setEnabled(false);
+                startButton.setVisibility(View.INVISIBLE);
 
             }
         }
