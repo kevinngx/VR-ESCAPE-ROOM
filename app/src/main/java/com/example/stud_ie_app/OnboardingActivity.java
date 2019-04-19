@@ -70,14 +70,10 @@ public class OnboardingActivity extends AppCompatActivity {
     }
 
     public void onStartButtonPress(View view) {
-
         if (currentPage == (mDots.length - 1)) {
-
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, DashboardActivity.class);
             startActivity(intent);
-
         }
-
     }
 
     public void addDotsIndicator(int position) {
@@ -96,7 +92,6 @@ public class OnboardingActivity extends AppCompatActivity {
         if (mDots.length > 0) {
             mDots[position].setTextColor(Color.WHITE);
         }
-
     }
 
     ViewPager.OnPageChangeListener viewListener = new ViewPager.OnPageChangeListener() {

@@ -38,7 +38,7 @@
 
             <ImageView
                 android:layout_alignParentRight="true"
-                android:src="@drawable/avatar1"
+                android:src="@drawable/avatar0"
                 android:layout_width="62dp"
                 android:layout_height="62dp" />
 
@@ -63,17 +63,18 @@
                 >
 
                 <LinearLayout
-                    android:orientation="vertical"
-                    android:padding="8dp"
-                    android:gravity="center"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="@color/colorPrimaryDark"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="8dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Intern"
-                        android:textColor="#6F6F6F"
+                        android:textColor="@android:color/white"
                         android:textSize="18sp" />
 
                 </LinearLayout>
@@ -185,18 +186,19 @@
                 >
 
                 <LinearLayout
-                    android:orientation="vertical"
-                    android:padding="8dp"
-                    android:gravity="center"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="@color/colorPrimaryDark"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="8dp">
 
                     <TextView
 
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Graduate"
-                        android:textColor="#6F6F6F"
+                        android:textColor="@android:color/white"
                         android:textSize="18sp" />
 
                 </LinearLayout>
@@ -302,18 +304,19 @@
                 >
 
                 <LinearLayout
-                    android:orientation="vertical"
-                    android:padding="8dp"
-                    android:gravity="center"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="@color/colorPrimaryDark"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="8dp">
 
                     <TextView
 
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Senior"
-                        android:textColor="#6F6F6F"
+                        android:textColor="@android:color/white"
                         android:textSize="18sp" />
 
                 </LinearLayout>
@@ -419,18 +422,19 @@
                 >
 
                 <LinearLayout
-                    android:orientation="vertical"
-                    android:padding="8dp"
-                    android:gravity="center"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="@color/colorPrimaryDark"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="8dp">
 
                     <TextView
 
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Manager"
-                        android:textColor="#6F6F6F"
+                        android:textColor="@android:color/white"
                         android:textSize="18sp" />
 
                 </LinearLayout>
@@ -536,18 +540,19 @@
                 >
 
                 <LinearLayout
-                    android:orientation="vertical"
-                    android:padding="8dp"
-                    android:gravity="center"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="@color/colorPrimaryDark"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="8dp">
 
                     <TextView
 
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Executive"
-                        android:textColor="#6F6F6F"
+                        android:textColor="@android:color/white"
                         android:textSize="18sp" />
 
                 </LinearLayout>

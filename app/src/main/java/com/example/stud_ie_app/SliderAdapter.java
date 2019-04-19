@@ -45,20 +45,19 @@ public class SliderAdapter extends PagerAdapter {
 
             // Learn
             "Here you will be tested on your knowledge of english grammar. " +
-                    "\n\nEach question of the quiz will present you with a sentence with a missing word. I" +
-                    "t is your job to find the missing word",
+                    "\n\nEach question of the quiz will present you with a sentence with a missing word. " +
+                    "It is your job to find the missing word",
 
             // Grow
-            "Get these questions right to build your your knowledge base increases your experience." +
-                    "\n\nGain enough experience points, and we may even consider you for promotion." +
+            "Get these questions right to build to increases your experience. " +
+                    "Gain enough experience points, and we may even consider you for promotion!" +
                     "\n\nAs you climb the corporate ladder, you will unlock even more levels to test" +
-                    "your skills! These levels will provide even more challenge and experience.",
+                    "your skills!",
 
             // Compete
             "We are a global company so there will be other employees around the world also" +
                     "pushing to climb the corporate ladder here at Stud.ie. " +
-                    "\n\nTrack your performance against other wordsmiths around the world, " +
-                    "and compete with them to see who is the top wordsmith of Stud.ie",
+                    "\n\nTrack your performance and compete against other wordsmiths around the world.",
 
             // Get Started!
             "So what are you waiting for? Press the button below to get started!"
