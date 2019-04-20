@@ -23,7 +23,6 @@
         </activity>
         <activity android:name=".OnboardingActivity" />
         <activity android:name=".QuestionActivity" />
-        <activity android:name=".LevelSelectActivity" />
         <activity android:name=".MainActivity" />
     </application>
 
