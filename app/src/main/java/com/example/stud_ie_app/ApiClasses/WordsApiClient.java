@@ -1,4 +1,4 @@
-package com.example.stud_ie_app;
+package com.example.stud_ie_app.ApiClasses;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

@@ -19,8 +19,8 @@ public class RegistrationTwoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_two);
 
-        id_image = (ImageView) findViewById(R.id.id_photo);
-        id_username = (TextView) findViewById(R.id.id_username);
+        id_image = (ImageView) findViewById(R.id.user_avatar);
+        id_username = (TextView) findViewById(R.id.user_username);
 
         Bundle bundle = getIntent().getExtras();
 

@@ -1,4 +1,4 @@
-package com.example.stud_ie_app;
+package com.example.stud_ie_app.DashboardFragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,19 +8,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class FragmentStats extends Fragment {
+import com.example.stud_ie_app.R;
+
+public class FragmentQuiz extends Fragment {
 
     View view;
 
-    public FragmentStats() {
+    public FragmentQuiz() {
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.stats_fragment, container, false);
+        view = inflater.inflate(R.layout.quiz_fragment, container, false);
 
         return view;
     }
-
 }

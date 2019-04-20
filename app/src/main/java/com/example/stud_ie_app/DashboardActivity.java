@@ -7,12 +7,23 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.example.stud_ie_app.DashboardFragments.FragmentLeaderboard;
+import com.example.stud_ie_app.DashboardFragments.FragmentQuiz;
+import com.example.stud_ie_app.DashboardFragments.FragmentUser;
 
 public class DashboardActivity extends AppCompatActivity {
 
     private TabLayout dashboardTabLayout;
     private AppBarLayout dashboardAppBarLayout;
     private ViewPager dashboardViewPager;
+
+    ImageView userAvater;
+    TextView userUsername;
+    TextView userRole;
+    TextView userScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +39,38 @@ public class DashboardActivity extends AppCompatActivity {
         // Adding fragments to the ViewPager
         adapter.addFragments(new FragmentUser(), "User");
         adapter.addFragments(new FragmentQuiz(), "Quiz");
-        adapter.addFragments(new FragmentStats(), "Stats");
+        adapter.addFragments(new FragmentLeaderboard(), "Leaderboard");
 
         // Setting up Adapter
         dashboardViewPager.setAdapter(adapter);
         dashboardTabLayout.setupWithViewPager(dashboardViewPager);
+
+        setupUserId();
+    }
+
+    private void setupUserId() {
+        userAvater = (ImageView) findViewById(R.id.user_avatar);
+        userUsername = (TextView) findViewById(R.id.user_username);
+        userRole = (TextView) findViewById(R.id.user_role);
+        userScore = (TextView) findViewById(R.id.user_score);
+
+        int[] avatars = {
+                R.drawable.avatar0,
+                R.drawable.avatar1,
+                R.drawable.avatar2,
+                R.drawable.avatar3,
+                R.drawable.avatar4,
+                R.drawable.avatar5,
+                R.drawable.avatar6,
+                R.drawable.avatar7,
+                R.drawable.avatar8,
+        };
+
+        userAvater.setImageResource(avatars[SessionData.currentUser.avatar]);
+        userUsername.setText(SessionData.currentUser.username);
+        userRole.setText(SessionData.currentUser.role);
+        userScore.setText(Integer.toString(SessionData.currentUser.score));
+
     }
 
     public void onLogoutButtonClick(View view) {

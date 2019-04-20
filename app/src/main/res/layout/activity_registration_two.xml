@@ -48,7 +48,7 @@
         app:cardElevation="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/employee_id">
+        app:layout_constraintTop_toBottomOf="@+id/leaderboard_employee_id">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -324,7 +324,7 @@
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
-        android:id="@+id/employee_id"
+        android:id="@+id/leaderboard_employee_id"
         android:layout_width="246dp"
         android:layout_height="78dp"
         android:layout_marginStart="8dp"
@@ -339,40 +339,40 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/id_photo"
+                android:id="@+id/user_avatar"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginBottom="8dp"
                 android:layout_weight="1"
-                app:layout_constraintBottom_toBottomOf="@+id/id_role"
+                app:layout_constraintBottom_toBottomOf="@+id/user_role"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/id_username"
+                app:layout_constraintTop_toTopOf="@+id/user_username"
                 app:layout_constraintVertical_bias="0.333"
                 app:srcCompat="@drawable/avatar0" />
 
             <TextView
-                android:id="@+id/id_username"
+                android:id="@+id/user_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/id_photo"
+                app:layout_constraintStart_toEndOf="@+id/user_avatar"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.19"
                 tools:text="Username" />
 
             <TextView
-                android:id="@+id/id_role"
+                android:id="@+id/user_role"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="Wordsmith Intern"
                 android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@+id/id_username"
-                app:layout_constraintTop_toBottomOf="@+id/id_username" />
+                app:layout_constraintStart_toStartOf="@+id/user_username"
+                app:layout_constraintTop_toBottomOf="@+id/user_username" />
         </android.support.constraint.ConstraintLayout>
 
     </android.support.v7.widget.CardView>
