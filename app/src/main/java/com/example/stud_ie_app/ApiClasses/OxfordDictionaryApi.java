@@ -19,22 +19,22 @@ public class OxfordDictionaryApi {
                 '}';
     }
 
-    class SentenceResult {
+    public class SentenceResult {
         String id;
         ArrayList<lexicalEntries> lexicalEntries;
 
-        class lexicalEntries {
-            String language;
-            String lexicalCategory;
-            String text;
-            ArrayList<Sentence> sentences;
+        public class lexicalEntries {
+            public String language;
+            public String lexicalCategory;
+            public String text;
+            public ArrayList<Sentence> sentences;
 
             public ArrayList<Sentence> getSentences() {
                 return sentences;
             }
 
-            class Sentence {
-                String text;
+            public class Sentence {
+                public String text;
 
             }
         }
