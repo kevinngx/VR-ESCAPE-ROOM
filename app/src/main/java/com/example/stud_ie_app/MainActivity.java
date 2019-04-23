@@ -25,17 +25,17 @@ public class MainActivity extends AppCompatActivity {
 //        TextView sentenceView = findViewById(R.id.sentenceText);
 //
 //        WordApi wordApi = WordHelper.getWord();
-//        OxfordDictionaryApi oxfordDictionaryApi = SentenceHelper.getSentence(wordApi.getWord());
+//        OxfordApiSentence oxfordDictionaryApi = OxfordApiHelper.getSentence(wordApi.getWord());
 //
 //        while (oxfordDictionaryApi == null) {
 //            wordApi = WordHelper.getWord();
-//            oxfordDictionaryApi = SentenceHelper.getSentence(wordApi.getWord());
+//            oxfordDictionaryApi = OxfordApiHelper.getSentence(wordApi.getWord());
 //        }
 //
 //        wordText.setText(wordApi.getWord());
-//        String sentence = oxfordDictionaryApi.getSentencesList().get(0).text;
-//        System.out.println(sentence);
-//        sentenceView.setText(sentence);
+//        String displaySentence = oxfordDictionaryApi.getSentencesList().get(0).text;
+//        System.out.println(displaySentence);
+//        sentenceView.setText(displaySentence);
 
 //        Intent intent = new Intent(this, LevelSelectActivity.class);
         Intent intent = new Intent(this, OnboardingActivity.class);

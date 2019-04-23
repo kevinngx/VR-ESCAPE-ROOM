@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-public class OxfordDictionaryApi {
+public class OxfordApiSentence {
 
     ArrayList<SentenceResult> results;
 
@@ -14,7 +14,7 @@ public class OxfordDictionaryApi {
 
     @Override
     public String toString() {
-        return "OxfordDictionaryApi{" +
+        return "OxfordApiSentence{" +
                 "results=" + results +
                 '}';
     }

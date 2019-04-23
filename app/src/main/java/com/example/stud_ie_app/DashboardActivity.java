@@ -16,6 +16,7 @@ import com.example.stud_ie_app.DashboardFragments.FragmentUser;
 
 public class DashboardActivity extends AppCompatActivity {
 
+    public static final String CATEGORY = "category";
     private TabLayout dashboardTabLayout;
     private AppBarLayout dashboardAppBarLayout;
     private ViewPager dashboardViewPager;
@@ -99,16 +100,16 @@ public class DashboardActivity extends AppCompatActivity {
         };
 
         String[] levelName = {
-                "transport",
-                "animals",
-                "sports",
-                "jobs",
-                "weather",
-                "nature",
-                "music",
-                "exercise",
-                "politics",
-                "astronomy"
+                "Transport",
+                "Animals",
+                "Sports",
+                "Jobs",
+                "Weather",
+                "Nature",
+                "Music",
+                "Exercise",
+                "Politics",
+                "Astronomy"
         };
 
         int levelId = 0;
@@ -120,6 +121,7 @@ public class DashboardActivity extends AppCompatActivity {
         System.out.println("Level Selected: " + levelName[levelId]);
 
         Intent intent = new Intent(this, QuestionActivity.class);
+        intent.putExtra(CATEGORY, levelName[levelId]);
         startActivity(intent);
     }
 }

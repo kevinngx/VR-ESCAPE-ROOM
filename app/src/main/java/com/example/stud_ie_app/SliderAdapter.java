@@ -45,7 +45,7 @@ public class SliderAdapter extends PagerAdapter {
 
             // Learn
             "Here you will be tested on your knowledge of english grammar. " +
-                    "\n\nEach question of the quiz will present you with a sentence with a missing word. " +
+                    "\n\nEach question of the quiz will present you with a displaySentence with a missing word. " +
                     "It is your job to find the missing word",
 
             // Grow
