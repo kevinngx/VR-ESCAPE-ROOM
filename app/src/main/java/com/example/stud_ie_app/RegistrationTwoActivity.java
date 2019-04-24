@@ -78,6 +78,7 @@ public class RegistrationTwoActivity extends AppCompatActivity {
                 Bundle bundle = getIntent().getExtras();
                 Users user = new Users(bundle.getString(RegistrationActivity.NEW_USERNAME), bundle.getString(RegistrationActivity.NEW_PASSWORD), newAvatar );
                 SessionData.mUserDatabase.mUserDao () . insertOnlySingleUser (user);
+                SessionData.currentUser = user;
             }
         }) .start();
         Intent intent = new Intent(this, OnboardingActivity.class);
