@@ -127,12 +127,12 @@
         android:id="@+id/errorMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Username is already taken"
         android:textColor="#FF4040"
         android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="@+id/passwordField"
         app:layout_constraintStart_toStartOf="@+id/passwordField"
-        app:layout_constraintTop_toBottomOf="@+id/passwordField" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordField"
+        tools:text="Warning Label" />
 
 
 </android.support.constraint.ConstraintLayout>

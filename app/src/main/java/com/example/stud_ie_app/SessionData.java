@@ -13,7 +13,7 @@ public class SessionData {
     public static void createDB(Context context){
 
          mUserDatabase = Room.databaseBuilder(context.getApplicationContext(),
-                UserDatabase.class, "user_db")
+                UserDatabase.class, "user_db").allowMainThreadQueries()
                 .fallbackToDestructiveMigration()
                 .build();
 
