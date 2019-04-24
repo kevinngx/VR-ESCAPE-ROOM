@@ -1,5 +1,6 @@
 package com.example.stud_ie_app;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -17,20 +18,13 @@ public class QuestionActivity extends AppCompatActivity {
 
     TextView questionCategory;
     TextView displaySentence;
-    TextView optionA;
-    TextView optionB;
-    TextView optionC;
-    TextView optionD;
 
-    CardView answerA;
-    CardView answerB;
-    CardView answerC;
-    CardView answerD;
+    CardView[] answers = new CardView[4];
+    TextView[] options = new TextView[4];
 
     String category;
     ArrayList<String> wordBank;
     int questionNumber = 0;
-    String currentSentence;
     int currentAnswer;
 
     @Override
@@ -40,25 +34,29 @@ public class QuestionActivity extends AppCompatActivity {
 
         questionCategory = (TextView) findViewById(R.id.question_category);
         displaySentence = (TextView) findViewById(R.id.question_sentence);
-        optionA = (TextView) findViewById(R.id.question_optionA);
-        optionB = (TextView) findViewById(R.id.question_optionB);
-        optionC = (TextView) findViewById(R.id.question_optionC);
-        optionD = (TextView) findViewById(R.id.question_optionD);
 
-        answerA = (CardView) findViewById(R.id.question_answerA);
-        answerB = (CardView) findViewById(R.id.question_answerB);
-        answerC = (CardView) findViewById(R.id.question_answerC);
-        answerD = (CardView) findViewById(R.id.question_answerD);
+        options[0] = (TextView) findViewById(R.id.question_optionA);
+        options[1] = (TextView) findViewById(R.id.question_optionB);
+        options[2] = (TextView) findViewById(R.id.question_optionC);
+        options[3] = (TextView) findViewById(R.id.question_optionD);
 
+        answers[0] = (CardView) findViewById(R.id.question_answerA);
+        answers[1] = (CardView) findViewById(R.id.question_answerB);
+        answers[2] = (CardView) findViewById(R.id.question_answerC);
+        answers[3] = (CardView) findViewById(R.id.question_answerD);
+
+        // Sets up level settings
         category = getIntent().getExtras().get(DashboardActivity.CATEGORY).toString();
         questionCategory.setText(category);
         wordBank = WordBank.getWordsBank(category);
 
-        getNextQuestion();
+        refreshQuestion();
 
     }
 
-    private void getNextQuestion() {
+    private void refreshQuestion() {
+        // Set up current question
+        clearCardColors();
         String word = wordBank.get(questionNumber);
         String sentence = getSentence(word);
         displaySentence.setText(getSentenceWithoutWord(sentence, word));
@@ -68,23 +66,26 @@ public class QuestionActivity extends AppCompatActivity {
     // Get synonyms from the API and display it to the user
     private void getOptions(String word) {
         ArrayList<String> synonyms;
-        ArrayList<String> options = new ArrayList<>();
+        ArrayList<String> optionText = new ArrayList<>();
 
         // Set the current answer
         try {
             synonyms = OxfordApiHelper.getSynonyms(word);
-            options.add(word);
+
+            optionText.add(word);
             for (int i = 0; i < 3; i++) {
-                options.add(synonyms.get(i));
-                if (synonyms.get(i).equals(word)) {
+                optionText.add(synonyms.get(i));
+            }
+
+            Collections.shuffle(optionText);
+
+            for (int i = 0; i < 4; i++) {
+                options[i].setText(optionText.get(i));
+                if (optionText.get(i).equals(word)) {
                     currentAnswer = i;
                 }
             }
-            Collections.shuffle(options);
-            optionA.setText(options.get(0));
-            optionB.setText(options.get(1));
-            optionC.setText(options.get(2));
-            optionD.setText(options.get(3));
+
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -122,14 +123,13 @@ public class QuestionActivity extends AppCompatActivity {
     }
 
     public void onAnswerSelect(View view) {
-        //TODO: Add options here
-        System.out.println("Answer selected: HUEFWEHWFUIWFH");
         int[] options = {
-            R.id.question_answerA,
-            R.id.question_answerB,
-            R.id.question_answerC,
-            R.id.question_answerD
+            R.id.question_answerA, // 0
+            R.id.question_answerB, // 1
+            R.id.question_answerC, // 2
+            R.id.question_answerD // 3
         };
+
         int answerSelected = 0;
         while (answerSelected < options.length) {
             if (view.getId() == options[answerSelected]) {
@@ -139,9 +139,23 @@ public class QuestionActivity extends AppCompatActivity {
         }
 
         if (answerSelected == currentAnswer) {
-            System.out.println("Incorrect answer!");
+            System.out.println("Correct answer selected! " + answerSelected);
         } else {
-            System.out.println("Correct answer");
+            System.out.println("Incorrect answer selected! " + answerSelected);
+        }
+        setCardColor(answerSelected);
+
+    }
+
+    public void setCardColor(int selectedAnswer) {
+        System.out.println("current answer: " + currentAnswer);
+        answers[selectedAnswer].setCardBackgroundColor(Color.parseColor("#F57C00"));
+        answers[currentAnswer].setCardBackgroundColor(Color.parseColor("#8BC34A"));
+    }
+
+    public void clearCardColors() {
+        for (int i = 0; i < 4; i++) {
+            answers[i].setCardBackgroundColor(Color.WHITE);
         }
     }
 
