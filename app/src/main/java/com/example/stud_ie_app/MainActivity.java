@@ -1,15 +1,20 @@
 package com.example.stud_ie_app;
 
+import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.amitshekhar.DebugDB;
+
+import com.example.stud_ie_app.DatabaseClasses.UserDatabase;
+
 import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
-
+    //public UserDatabase mUserDatabase;
     public static final String BASE_URL = "https://wordsapiv1.p.rapidapi.com/words/";
 
     @Override
@@ -17,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         TextView textView = findViewById(R.id.wordText);
+        System.out.println("This is our debug address: " + DebugDB.getAddressLog());
+
     }
 
     public void onButtonPress(View view) throws ExecutionException, InterruptedException {

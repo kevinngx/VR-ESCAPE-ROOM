@@ -67,10 +67,10 @@ public class DashboardActivity extends AppCompatActivity {
                 R.drawable.avatar8,
         };
 
-        userAvater.setImageResource(avatars[SessionData.currentUser.avatar]);
-        userUsername.setText(SessionData.currentUser.username);
-        userRole.setText(SessionData.currentUser.role);
-        userScore.setText(Integer.toString(SessionData.currentUser.score));
+        userAvater.setImageResource(avatars[SessionData.currentUser.getAvatar()]);
+        userUsername.setText(SessionData.currentUser.getUserName());
+        userRole.setText(SessionData.currentUser.getRole());
+        userScore.setText(Integer.toString(SessionData.currentUser.getScore()));
 
     }
 

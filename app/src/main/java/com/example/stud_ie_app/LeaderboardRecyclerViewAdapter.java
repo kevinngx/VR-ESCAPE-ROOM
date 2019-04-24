@@ -17,9 +17,9 @@ import java.util.List;
 public class LeaderboardRecyclerViewAdapter extends RecyclerView.Adapter<LeaderboardRecyclerViewAdapter.LeaderboardViewHolder> {
 
     Context mContext;
-    List<User> mData;
+    List<Users> mData;
 
-    public LeaderboardRecyclerViewAdapter(Context context, List<User> data) {
+    public LeaderboardRecyclerViewAdapter(Context context, List<Users> data) {
         mContext = context;
         mData = data;
     }
@@ -36,14 +36,14 @@ public class LeaderboardRecyclerViewAdapter extends RecyclerView.Adapter<Leaderb
     @Override
     public void onBindViewHolder(@NonNull LeaderboardViewHolder holder, int position) {
         //TODO: Change this to highlight current user's card
-        if (mData.get(position).username.equals(SessionData.currentUser.username)) {
+        if (mData.get(position).getUserName().equals(SessionData.currentUser.getUserName())) {
             holder.userCard.setCardBackgroundColor(Color.parseColor("#ABB4BE"));
         } else {
             holder.userCard.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
         }
-        holder.username.setText(mData.get(position).username);
-        holder.role.setText(mData.get(position).role);
-        holder.score.setText(Integer.toString(mData.get(position).score));
+        holder.username.setText(mData.get(position).getUserName());
+        holder.role.setText(mData.get(position).getRole());
+        holder.score.setText(Integer.toString(mData.get(position).getScore()));
         holder.rank.setText(Integer.toString(position + 1));
         int[] avatars = {
                 R.drawable.avatar0,
@@ -56,7 +56,7 @@ public class LeaderboardRecyclerViewAdapter extends RecyclerView.Adapter<Leaderb
                 R.drawable.avatar7,
                 R.drawable.avatar8,
         };
-        holder.avatar.setImageResource(avatars[mData.get(position).avatar]);
+        holder.avatar.setImageResource(avatars[mData.get(position).getAvatar()]);
     }
 
     @Override

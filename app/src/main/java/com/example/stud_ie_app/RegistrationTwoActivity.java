@@ -7,7 +7,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.stud_ie_app.DatabaseClasses.UserDatabase;
+
 public class RegistrationTwoActivity extends AppCompatActivity {
+
     ImageView id_image;
     TextView id_username;
     String newUsername;
@@ -68,6 +71,15 @@ public class RegistrationTwoActivity extends AppCompatActivity {
 //        System.out.println(String.format("LOGIN DETAILS PASSED \nUsername: %s \nPassword: %s \nPasswrod: %s",
 //                newUsername.getText(), newPasswordOne.getText(), newPasswordTwo.getText()));
 
+        //create user
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Bundle bundle = getIntent().getExtras();
+                Users user = new Users(bundle.getString(RegistrationActivity.NEW_USERNAME), bundle.getString(RegistrationActivity.NEW_PASSWORD), newAvatar );
+                SessionData.mUserDatabase.mUserDao () . insertOnlySingleUser (user);
+            }
+        }) .start();
         Intent intent = new Intent(this, OnboardingActivity.class);
         startActivity(intent);
     }

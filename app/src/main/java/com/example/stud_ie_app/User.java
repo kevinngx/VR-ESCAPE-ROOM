@@ -1,5 +1,6 @@
-package com.example.stud_ie_app;
 
+package com.example.stud_ie_app;
+/*
 public class User {
     String username;
     String role;
@@ -58,3 +59,4 @@ public class User {
                 '}';
     }
 }
+*/

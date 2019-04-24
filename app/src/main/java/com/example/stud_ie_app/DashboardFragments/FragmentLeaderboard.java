@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 
 import com.example.stud_ie_app.LeaderboardRecyclerViewAdapter;
 import com.example.stud_ie_app.R;
-import com.example.stud_ie_app.User;
+import com.example.stud_ie_app.Users;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ public class FragmentLeaderboard extends Fragment {
 
     View view;
     private RecyclerView leaderboardRecyclerView;
-    private List<User> mUsers;
+    private List<Users> mUsers;
 
     public FragmentLeaderboard() {
     }
@@ -44,22 +44,9 @@ public class FragmentLeaderboard extends Fragment {
         super.onCreate(savedInstanceState);
         mUsers = new ArrayList<>();
         //TODO: Replace hard code with actual list
-        mUsers.add(new User("Kevin the carry Nguyen", "Intern", 1000, 1));
-        mUsers.add(new User("Sand Nigga", "Graduate", 1500, 3));
-        mUsers.add(new User("Adam big dick Chew", "Exec", 120300, 3));
-        mUsers.add(new User("Kevin the carry Nguyen", "Senior", 1000, 4));
-        mUsers.add(new User("Sand Nigga", "Graduate", 1500, 5));
-        mUsers.add(new User("RM Williams Rob", "Director", 120300, 6));
-        mUsers.add(new User("Curry Muncher", "Intern", 1000, 7));
-        mUsers.add(new User("Uesless Fuck", "Graduate", 1500, 8));
-        mUsers.add(new User("Joyce the hottie", "Intern", 1000, 1));
-        mUsers.add(new User("Oscar bae", "Graduate", 1500, 3));
-        mUsers.add(new User("Yenni Timmy Turner", "Exec", 120300, 3));
-        mUsers.add(new User("Ali Ali Akhbar", "Intern", 1000, 4));
-        mUsers.add(new User("BIG DICK ENERGY!!", "Graduate", 1500, 5));
-        mUsers.add(new User("Osama Bin Suck my Dick", "Exec", 120300, 6));
-        mUsers.add(new User("Sand Nigga #2", "Intern", 1000, 7));
-        mUsers.add(new User("Halal", "Graduate", 1500, 8));
+        mUsers.add(new Users("Kevin", "password", 1));
+        mUsers.add(new Users("Sand Nigga", "muslim", 3));
+        mUsers.add(new Users("Adam", "chew", 4));
 
     }
 }
