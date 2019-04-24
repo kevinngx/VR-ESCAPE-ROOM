@@ -62,14 +62,15 @@ public class QuestionActivity extends AppCompatActivity {
         String word = wordBank.get(questionNumber);
         String sentence = getSentence(word);
         displaySentence.setText(getSentenceWithoutWord(sentence, word));
-        displayOptions(word);
+        getOptions(word);
     }
 
     // Get synonyms from the API and display it to the user
-    private void displayOptions(String word) {
+    private void getOptions(String word) {
         ArrayList<String> synonyms;
         ArrayList<String> options = new ArrayList<>();
 
+        // Set the current answer
         try {
             synonyms = OxfordApiHelper.getSynonyms(word);
             options.add(word);
@@ -123,8 +124,25 @@ public class QuestionActivity extends AppCompatActivity {
     public void onAnswerSelect(View view) {
         //TODO: Add options here
         System.out.println("Answer selected: HUEFWEHWFUIWFH");
+        int[] options = {
+            R.id.question_answerA,
+            R.id.question_answerB,
+            R.id.question_answerC,
+            R.id.question_answerD
+        };
+        int answerSelected = 0;
+        while (answerSelected < options.length) {
+            if (view.getId() == options[answerSelected]) {
+                break;
+            }
+            answerSelected++;
+        }
 
-
+        if (answerSelected == currentAnswer) {
+            System.out.println("Incorrect answer!");
+        } else {
+            System.out.println("Correct answer");
+        }
     }
 
 }
