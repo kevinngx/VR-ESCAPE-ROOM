@@ -21,7 +21,7 @@ public class DashboardActivity extends AppCompatActivity {
     private AppBarLayout dashboardAppBarLayout;
     private ViewPager dashboardViewPager;
 
-    ImageView userAvater;
+    ImageView userAvatar;
     TextView userUsername;
     TextView userRole;
     TextView userScore;
@@ -50,7 +50,7 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     private void setupUserId() {
-        userAvater = (ImageView) findViewById(R.id.user_avatar);
+        userAvatar = (ImageView) findViewById(R.id.user_avatar);
         userUsername = (TextView) findViewById(R.id.user_username);
         userRole = (TextView) findViewById(R.id.user_role);
         userScore = (TextView) findViewById(R.id.user_score);
@@ -67,7 +67,7 @@ public class DashboardActivity extends AppCompatActivity {
                 R.drawable.avatar8,
         };
 
-        userAvater.setImageResource(avatars[SessionData.currentUser.getAvatar()]);
+        userAvatar.setImageResource(avatars[SessionData.currentUser.getAvatar()]);
         userUsername.setText(SessionData.currentUser.getUserName());
         userRole.setText(SessionData.currentUser.getRole());
         userScore.setText(Integer.toString(SessionData.currentUser.getScore()));

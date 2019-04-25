@@ -28,8 +28,8 @@ public class LoginActivity extends AppCompatActivity {
         password = findViewById(R.id.passwordField);
         errorMsg = findViewById(R.id.errorMessage);
 
-       
-        if (SessionData.mBadgeDatabase.mBadgeDao().getAll() != null){
+
+        if (SessionData.mBadgeDatabase.mBadgeDao().getAll() == null){
             List<Badges> badgesList = new ArrayList();
             badgesList.add(new Badges(1, "Intern", "100 points!", 1));
             badgesList.add(new Badges(2, "Graduate", "300 points!", 2));
