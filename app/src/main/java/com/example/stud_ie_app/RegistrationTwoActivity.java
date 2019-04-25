@@ -7,8 +7,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.stud_ie_app.DatabaseClasses.UserDatabase;
-
 public class RegistrationTwoActivity extends AppCompatActivity {
 
     ImageView id_image;
@@ -23,7 +21,7 @@ public class RegistrationTwoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registration_two);
 
         id_image = (ImageView) findViewById(R.id.user_avatar);
-        id_username = (TextView) findViewById(R.id.user_username);
+        id_username = (TextView) findViewById(R.id.leaderboard_username);
 
         Bundle bundle = getIntent().getExtras();
 
