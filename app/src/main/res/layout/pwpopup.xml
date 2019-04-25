@@ -109,8 +109,6 @@
         android:layout_height="wrap_content"
         android:text="Follow Me"
         android:layout_marginTop="25dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/buttonstyle"
-        android:textColor="@color/white"/>
+        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>

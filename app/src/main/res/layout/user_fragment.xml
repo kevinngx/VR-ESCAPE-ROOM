@@ -16,25 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="8dp"
-            android:layout_marginRight="20dp">
-
-            <TextView
-                android:id="@+id/PageTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Level Selection"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="22sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/PageTitle"
-                android:text="Please select a level"
-                android:textColor="#52BAFF"
-                android:textSize="12sp" />
-
-        </RelativeLayout>
+            android:layout_marginRight="20dp"/>
 
         <GridLayout
             android:layout_width="match_parent"
@@ -91,7 +73,6 @@
                 android:layout_margin="12dp"
                 android:clickable="true"
                 android:foreground="?android:attr/selectableItemBackground"
-                android:onClick="ShowPopup"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp">
 

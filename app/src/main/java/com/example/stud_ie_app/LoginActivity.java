@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
             badgesList.add(new Badges(14, "Exercise Guru", "10 correct in one session: Exercise", 14));
             badgesList.add(new Badges(15, "Politics Guru", "10 correct in one session: Politics", 15));
             badgesList.add(new Badges(16, "Astronomy Guru", "10 correct in one session: Astronomy", 16));
-//            SessionData.mBadgeDatabase.mBadgeDao().insertMultipleBadges (badgesList);
+            SessionData.mBadgeDatabase.mBadgeDao().insertMultipleBadges (badgesList);
         }
 
 
