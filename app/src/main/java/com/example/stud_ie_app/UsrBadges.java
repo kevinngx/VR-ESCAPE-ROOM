@@ -19,6 +19,9 @@ public class UsrBadges {
         this.BadgeID = badgeID;
     }
 
+    public UsrBadges() {
+    }
+
     @NonNull
     public String getUsrBadgeID() {
         return UsrBadgeID;
