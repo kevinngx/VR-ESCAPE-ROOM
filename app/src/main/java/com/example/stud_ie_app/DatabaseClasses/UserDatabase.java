@@ -3,6 +3,7 @@ package com.example.stud_ie_app.DatabaseClasses;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.RoomDatabase;
 
+import com.example.stud_ie_app.Badges;
 import com.example.stud_ie_app.UserDao;
 import com.example.stud_ie_app.Users;
 

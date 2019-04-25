@@ -5,17 +5,25 @@ import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.view.View;
 
+import com.example.stud_ie_app.DatabaseClasses.BadgeDatabase;
 import com.example.stud_ie_app.DatabaseClasses.UserDatabase;
 
 public class SessionData {
     public static Users currentUser = new Users("Kevin", "password", 1);
     public static UserDatabase mUserDatabase;
+    public static BadgeDatabase mBadgeDatabase;
     public static void createDB(Context context){
 
          mUserDatabase = Room.databaseBuilder(context.getApplicationContext(),
                 UserDatabase.class, "user_db").allowMainThreadQueries()
                 .fallbackToDestructiveMigration()
                 .build();
+
+         mBadgeDatabase = Room.databaseBuilder(context.getApplicationContext(),
+                 BadgeDatabase.class, "badge_db").allowMainThreadQueries()
+                 .fallbackToDestructiveMigration()
+                 .build();
+
 
     };
 

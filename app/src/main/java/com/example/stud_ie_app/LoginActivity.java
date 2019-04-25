@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 public class LoginActivity extends AppCompatActivity {
     public boolean usrExist = false;
-    public boolean loginCorrect = false;
+//    public boolean loginCorrect = false;
     private TextView username;
     private TextView password;
     private TextView errorMsg;
@@ -37,19 +37,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onLoginButtonPress(View view) {
         Users testUser = SessionData.mUserDatabase.mUserDao().fetchOneUserByUserName(username.getText().toString());
-        // query to check if usr exists
-//
 
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-                if (password.getText().toString().equals(SessionData.mUserDatabase.mUserDao().fetchOneUserByUserName(username.getText().toString()).getPassword())) {
-                    loginCorrect = true;
-                } else {
-                    loginCorrect = false;
-                }
-//            }
-//        }) .start();
         //TODO: Add Login Checks
         System.out.println(String.format("LOGIN DETAILS PASSED \nUsername: %s \nPassword: %s",
                 username.getText(), password.getText()));
@@ -59,15 +47,14 @@ public class LoginActivity extends AppCompatActivity {
             errorMsg.setText("Please fill out the password field");
         } else if (testUser == null){
             errorMsg.setText("User doesn't exist");
-        } else if (testUser.getPassword().toString().equals(username.getText().toString())){
+        } else if (testUser.getPassword().toString().equals(password.getText().toString())){
 
             Intent intent = new Intent(this, DashboardActivity.class);
             startActivity(intent);
             SessionData.currentUser = testUser;
-            //errorMsg.setText("Us");
         } else{
             errorMsg.setText("Your login details are incorrect");
-        };
+        }
         //test = SessionData.mUserDatabase.mUserDao () . fetchOneUserByUserName(username.getText().toString());
 
     }

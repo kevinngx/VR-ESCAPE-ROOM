@@ -14,6 +14,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private TextView newUsername;
     private TextView newPasswordOne;
     private TextView newPasswordTwo;
+    private TextView registrationErrorMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,18 +24,32 @@ public class RegistrationActivity extends AppCompatActivity {
         newUsername = findViewById(R.id.newUsername);
         newPasswordOne = findViewById(R.id.newPasswordOne);
         newPasswordTwo = findViewById(R.id.newPasswordTwo);
+        registrationErrorMessage = findViewById(R.id.registrationErrorMessage);
 
     }
 
     public void onSubmitButtonPress(View view) {
         //TODO: Add Login Checks
-        System.out.println(String.format("LOGIN DETAILS PASSED \nUsername: %s \nPassword: %s \nPasswrod: %s",
-                newUsername.getText(), newPasswordOne.getText(), newPasswordTwo.getText()));
 
-        Intent intent = new Intent(this, RegistrationTwoActivity.class);
-        intent.putExtra(NEW_USERNAME, newUsername.getText().toString());
-        intent.putExtra(NEW_PASSWORD, newPasswordOne.getText().toString());
-        startActivity(intent);
+        if(newUsername.getText().toString().equals("")) {
+            registrationErrorMessage.setText("Please fill out the username field");
+        } else if (newPasswordOne.getText().toString().equals("") || newPasswordTwo.getText().toString().equals("")) {
+            registrationErrorMessage.setText("Please fill out both password fields");
+        } else if (newPasswordOne.getText().toString().equals(newPasswordTwo.getText().toString()) == false) {
+            registrationErrorMessage.setText("Passwords did not match");
+        } else if (SessionData.mUserDatabase.mUserDao().fetchOneUserByUserName(newUsername.getText().toString()) != null){
+            registrationErrorMessage.setText("Username taken");
+        } else{
+            System.out.println(String.format("LOGIN DETAILS PASSED \nUsername: %s \nPassword: %s \nPasswrod: %s",
+                    newUsername.getText(), newPasswordOne.getText(), newPasswordTwo.getText()));
+
+            Intent intent = new Intent(this, RegistrationTwoActivity.class);
+            intent.putExtra(NEW_USERNAME, newUsername.getText().toString());
+            intent.putExtra(NEW_PASSWORD, newPasswordOne.getText().toString());
+            startActivity(intent);
+        }
+
+
     }
 
     public void onBackToLoginButtonPress(View view) {
