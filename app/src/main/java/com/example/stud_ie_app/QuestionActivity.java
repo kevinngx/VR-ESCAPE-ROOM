@@ -1,7 +1,6 @@
 package com.example.stud_ie_app;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -10,18 +9,19 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.stud_ie_app.ApiClasses.OxfordApiHelper;
-import com.example.stud_ie_app.DatabaseClasses.WordBank;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.ExecutionException;
 
 public class QuestionActivity extends AppCompatActivity {
+    private static final String TAG = "QuestionActivity";
 
     Dialog mDialog;
     CardView pointsCard;
@@ -42,6 +42,7 @@ public class QuestionActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate: start");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
 
@@ -67,8 +68,9 @@ public class QuestionActivity extends AppCompatActivity {
         // Sets up level settings
         category = getIntent().getExtras().get(DashboardActivity.CATEGORY).toString();
         questionCategory.setText(category);
-        wordBank = WordBank.getWordsBank(category);
-
+        Log.d(TAG, "onCreate: Category is: " + category);
+        wordBank = QuestionBank.getWordsBank(category);
+        Log.d(TAG, "onCreate: Word Bank downloaded");
         refreshQuestion();
 
     }

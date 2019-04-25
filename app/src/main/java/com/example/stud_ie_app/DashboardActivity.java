@@ -88,7 +88,7 @@ public class DashboardActivity extends AppCompatActivity {
         // Identify Level
         int[] levels = {
                 R.id.level_transport, // 0
-                R.id.level_animals, // 1
+                R.id.level_beach, // 1
                 R.id.level_sports, // 2
                 R.id.level_jobs, // 3
                 R.id.level_weather, // 4
