@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 
 import com.example.stud_ie_app.LeaderboardRecyclerViewAdapter;
 import com.example.stud_ie_app.R;
+import com.example.stud_ie_app.SessionData;
 import com.example.stud_ie_app.Users;
 
 import java.util.ArrayList;
@@ -42,11 +43,14 @@ public class FragmentLeaderboard extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mUsers = SessionData.mUserDatabase.mUserDao().getAll();
+        /*
         mUsers = new ArrayList<>();
         //TODO: Replace hard code with actual list
         mUsers.add(new Users("Kevin", "password", 1));
         mUsers.add(new Users("Sand Nigga", "muslim", 3));
         mUsers.add(new Users("Adam", "chew", 4));
+        */
 
     }
 }

@@ -60,6 +60,7 @@ public class LoginActivity extends AppCompatActivity {
         } else if (testUser == null){
             errorMsg.setText("User doesn't exist");
         } else if (testUser.getPassword().toString().equals(username.getText().toString())){
+
             Intent intent = new Intent(this, DashboardActivity.class);
             startActivity(intent);
             SessionData.currentUser = testUser;

@@ -12,12 +12,22 @@ import java.util.List;
 public interface UserDao {
     @Insert
     void insertOnlySingleUser (Users users);
+
     @Insert
     void insertMultipleUsers (List<Users> usersList);
+
     @Query ("SELECT * FROM Users WHERE userName = :userName")
     Users fetchOneUserByUserName (String userName);
+
+    @Query("SELECT * FROM Users ORDER BY score DESC")
+    List<Users> getAll();
+
+    @Query("UPDATE USERS SET score = score + :addNum WHERE userName = :userName")
+    void updateScore (int addNum, String userName);
+
     @Update
     void updateUser (Users users);
+
     @Delete
     void deleteUser (Users users);
 
