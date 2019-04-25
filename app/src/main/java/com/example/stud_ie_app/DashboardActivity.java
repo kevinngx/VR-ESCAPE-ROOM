@@ -51,7 +51,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     private void setupUserId() {
         userAvater = (ImageView) findViewById(R.id.user_avatar);
-        userUsername = (TextView) findViewById(R.id.user_username);
+        userUsername = (TextView) findViewById(R.id.leaderboard_username);
         userRole = (TextView) findViewById(R.id.user_role);
         userScore = (TextView) findViewById(R.id.user_score);
 
@@ -101,8 +101,8 @@ public class DashboardActivity extends AppCompatActivity {
 
         String[] levelName = {
                 "Transport",
-                "Animals",
-                "Sports",
+                "Beach",
+                "Circus",
                 "Jobs",
                 "Weather",
                 "Nature",

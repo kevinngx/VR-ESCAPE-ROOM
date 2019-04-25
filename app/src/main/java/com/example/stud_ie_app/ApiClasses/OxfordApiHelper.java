@@ -69,6 +69,20 @@ public class OxfordApiHelper {
         return sentence;
     }
 
+    public static ArrayList<String> getSentenceList(String word) throws ExecutionException, InterruptedException {
+        GetSentenceTask getSentenceTask = new OxfordApiHelper.GetSentenceTask();
+        OxfordApiSentence oxfordApiSentence = getSentenceTask.execute(word).get();
+        ArrayList<OxfordApiSentence.SentenceResult.lexicalEntries.Sentence> sentences = oxfordApiSentence.getSentencesList();
+        Collections.shuffle(sentences);
+        ArrayList<String> sentenceList = new ArrayList<>();
+        for (int i = 0; i < sentences.size(); i++) {
+            sentenceList.add(sentences.get(i).text);
+        }
+//        String sentence = sentences.get(0).text;
+//        System.out.println("Sentence pulled = " + sentence);
+        return sentenceList;
+    }
+
     private static class GetSentenceTask extends AsyncTask<String, Void, OxfordApiSentence> {
 
         @Override

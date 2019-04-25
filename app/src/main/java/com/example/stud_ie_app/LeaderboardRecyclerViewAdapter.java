@@ -2,7 +2,6 @@ package com.example.stud_ie_app;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.se.omapi.Session;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -34,17 +33,16 @@ public class LeaderboardRecyclerViewAdapter extends RecyclerView.Adapter<Leaderb
     }
 
     @Override
-    public void onBindViewHolder(@NonNull LeaderboardViewHolder holder, int position) {
-        //TODO: Change this to highlight current user's card
+    public void onBindViewHolder(@NonNull LeaderboardViewHolder viewHolder, int position) {
         if (mData.get(position).getUserName().equals(SessionData.currentUser.getUserName())) {
-            holder.userCard.setCardBackgroundColor(Color.parseColor("#ABB4BE"));
+            viewHolder.userCard.setCardBackgroundColor(Color.parseColor("#ABB4BE"));
         } else {
-            holder.userCard.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
+            viewHolder.userCard.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
         }
-        holder.username.setText(mData.get(position).getUserName());
-        holder.role.setText(mData.get(position).getRole());
-        holder.score.setText(Integer.toString(mData.get(position).getScore()));
-        holder.rank.setText(Integer.toString(position + 1));
+        viewHolder.username.setText(mData.get(position).getUserName());
+        viewHolder.role.setText(mData.get(position).getRole());
+        viewHolder.score.setText(Integer.toString(mData.get(position).getScore()));
+        viewHolder.rank.setText(Integer.toString(position + 1));
         int[] avatars = {
                 R.drawable.avatar0,
                 R.drawable.avatar1,
@@ -56,7 +54,7 @@ public class LeaderboardRecyclerViewAdapter extends RecyclerView.Adapter<Leaderb
                 R.drawable.avatar7,
                 R.drawable.avatar8,
         };
-        holder.avatar.setImageResource(avatars[mData.get(position).getAvatar()]);
+        viewHolder.avatar.setImageResource(avatars[mData.get(position).getAvatar()]);
     }
 
     @Override
@@ -76,10 +74,10 @@ public class LeaderboardRecyclerViewAdapter extends RecyclerView.Adapter<Leaderb
         public LeaderboardViewHolder(View itemView) {
             super(itemView);
 
-            username = (TextView) itemView.findViewById(R.id.user_username);
+            username = (TextView) itemView.findViewById(R.id.leaderboard_username);
             role = (TextView) itemView.findViewById(R.id.user_role);
             score = (TextView) itemView.findViewById(R.id.leaderboard_user_score);
-            rank = (TextView) itemView.findViewById(R.id.leaderboard_rank);
+            rank = (TextView) itemView.findViewById(R.id.leaderboard_ranking);
             avatar = (ImageView) itemView.findViewById(R.id.user_avatar);
             userCard = (CardView) itemView.findViewById(R.id.leaderboard_employee_id);
 
