@@ -39,4 +39,6 @@ public interface UserDao {
     @Delete
     void deleteUser (Users users);
 
+    @Query("UPDATE USERS SET role = :newRole WHERE userName = :userName")
+    void updateRole(String newRole, String userName);
 }

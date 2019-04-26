@@ -10,9 +10,12 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +28,7 @@ import com.example.stud_ie_app.DashboardFragments.FragmentUser;
 import com.example.stud_ie_app.DatabaseClasses.ImageBank;
 import com.example.stud_ie_app.DatabaseClasses.SessionData;
 import com.example.stud_ie_app.RecyclerViewAdapters.BadgeRecyclerViewAdapter;
+import com.example.stud_ie_app.RecyclerViewAdapters.RoleBadgesRecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -126,9 +130,10 @@ public class DashboardActivity extends AppCompatActivity {
         mDialog.setContentView(R.layout.popup_update_role);
 
         Button popupBack = (Button) mDialog.findViewById(R.id.popup_back);
-        Button popupSubmit = (Button) mDialog.findViewById(R.id.popup_submit);
+        Button popupApply = (Button) mDialog.findViewById(R.id.popup_apply);
+        Button popupSave = (Button) mDialog.findViewById(R.id.popup_save);
 
-        RecyclerView badgeRecyclerView;
+        RecyclerView roleBadgeRecyclerView;
 
         updateAvatar = (ImageView) mDialog.findViewById(R.id.update_avatar);
         updateUsername = (TextView) mDialog.findViewById(R.id.update_username);
@@ -142,11 +147,11 @@ public class DashboardActivity extends AppCompatActivity {
 
         // Setup RecyclerView
         getUserBadges();
-        badgeRecyclerView = (RecyclerView) mDialog.findViewById(R.id.role_recyclerView);
-        badgeRecyclerView.setHasFixedSize(true);
-        BadgeRecyclerViewAdapter recyclerViewAdapter = new BadgeRecyclerViewAdapter(mDialog.getContext(), mBadges);
-        badgeRecyclerView.setLayoutManager(new LinearLayoutManager(mDialog.getContext(), LinearLayoutManager.HORIZONTAL, false));
-        badgeRecyclerView.setAdapter(recyclerViewAdapter);
+        roleBadgeRecyclerView = (RecyclerView) mDialog.findViewById(R.id.role_recyclerView);
+        roleBadgeRecyclerView.setHasFixedSize(true);
+        RoleBadgesRecyclerViewAdapter recyclerViewAdapter = new RoleBadgesRecyclerViewAdapter(mDialog.getContext(), mBadges);
+        roleBadgeRecyclerView.setLayoutManager(new LinearLayoutManager(mDialog.getContext(), LinearLayoutManager.HORIZONTAL, false));
+        roleBadgeRecyclerView.setAdapter(recyclerViewAdapter);
 
         popupBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,14 +160,27 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
-        popupSubmit.setOnClickListener(new View.OnClickListener() {
+        popupApply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("Submit Changes");
+                if (!SessionData.selectedRole.equals("DEFAULT")) {
+                    updateRole.setText(SessionData.selectedRole);
+                }
             }
         });
 
-        
+        popupSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!SessionData.selectedRole.equals("DEFAULT")) {
+                    updateRole.setText(SessionData.selectedRole);
+                    String newRole = updateRole.getText().toString();
+                    SessionData.currentUser.setRole(newRole);
+                    userRole.setText(newRole);
+                    SessionData.mUserDatabase.mUserDao().updateRole(newRole, SessionData.currentUser.getUserName());
+                }
+            }
+        });
 
         // Launch dialog window
         mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
@@ -300,10 +318,5 @@ public class DashboardActivity extends AppCompatActivity {
         }
         updateAvatar.setImageResource(ImageBank.avatars[selectedAvatar]);
     }
-
-    public void onRoleSelectPress(View view) {
-
-    }
-
 
 }

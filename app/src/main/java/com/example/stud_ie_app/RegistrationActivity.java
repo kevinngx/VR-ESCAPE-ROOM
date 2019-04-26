@@ -27,6 +27,7 @@ public class RegistrationActivity extends AppCompatActivity {
         newPasswordOne = findViewById(R.id.newPasswordOne);
         newPasswordTwo = findViewById(R.id.newPasswordTwo);
         registrationErrorMessage = findViewById(R.id.registrationErrorMessage);
+        registrationErrorMessage.setText("");
 
     }
 

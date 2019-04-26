@@ -1,11 +1,21 @@
 package com.example.stud_ie_app;
 
+import android.app.Dialog;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
+import android.content.Context;
 import android.support.annotation.NonNull;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.example.stud_ie_app.DatabaseClasses.ImageBank;
 
 @Entity
 public class Badges {
+
     @NonNull
     @PrimaryKey
     private int badgeID;
@@ -63,4 +73,6 @@ public class Badges {
                 ", icon=" + icon +
                 '}';
     }
+
+
 }

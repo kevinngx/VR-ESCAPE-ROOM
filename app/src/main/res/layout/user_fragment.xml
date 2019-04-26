@@ -81,8 +81,8 @@
                         android:padding="8dp">
 
                         <ImageView
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
                             android:src="@drawable/update_role" />
 
                         <TextView
@@ -119,8 +119,8 @@
                         android:padding="8dp">
 
                         <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="35dp"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
                             android:src="@drawable/update_avatar" />
 
                         <TextView
@@ -157,8 +157,8 @@
                         android:padding="8dp">
 
                         <ImageView
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
                             android:src="@drawable/update_password" />
 
                         <TextView
