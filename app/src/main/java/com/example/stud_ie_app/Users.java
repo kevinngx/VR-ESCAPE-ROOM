@@ -4,6 +4,10 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
+import com.example.stud_ie_app.DatabaseClasses.SessionData;
+
+import java.util.List;
+
 @Entity
 public class Users {
     @NonNull
@@ -22,10 +26,7 @@ public class Users {
             this.score = 0;
             this.role = "Intern";
             this.avatar = avatar;
-
     }
-
-
 
     public String getUserName() {
         return userName;
@@ -77,5 +78,17 @@ public class Users {
                 ", avatar=" + avatar +
                 ", role='" + role + '\'' +
                 '}';
+    }
+
+    public boolean hasBadge(int badgeId) {
+        // Returns true if they have the badge
+        boolean hasBadge = false;
+        List<UsrBadges> userBadges = SessionData.mUsrBadgesDatabase.mUsrBadgesDao().getAllBadgesByUser(SessionData.currentUser.getUserName());
+        for (int i = 0; i < userBadges.size(); i++) {
+            if (userBadges.get(i).getBadgeID() == badgeId) {
+                hasBadge = true;
+            }
+        }
+        return hasBadge;
     }
 }

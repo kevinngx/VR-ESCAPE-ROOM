@@ -169,10 +169,10 @@ public class QuestionActivity extends AppCompatActivity {
     private void markAnswer(int answer) {
         if (answer == currentAnswer) {
             int score = QuestionBank.getScore(category);
+            checkLevelBadge(score);
             pointsAllocation.setText(String.format("+%s points!", Integer.toString(score)));
             SessionData.currentUser.setScore(SessionData.currentUser.getScore() + score);
             SessionData.mUserDatabase.mUserDao().updateScore(score, SessionData.currentUser.getUserName());
-            checkLevelBadge(score);
         } else {
             pointsAllocation.setText("Incorrect Answer");
         }

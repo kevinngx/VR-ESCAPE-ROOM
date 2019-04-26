@@ -1,7 +1,9 @@
 package com.example.stud_ie_app;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,9 +12,14 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.stud_ie_app.DatabaseClasses.ImageBank;
+import com.example.stud_ie_app.DatabaseClasses.SessionData;
+
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class OnboardingActivity extends AppCompatActivity {
@@ -21,6 +28,8 @@ public class OnboardingActivity extends AppCompatActivity {
     private LinearLayout mDotLayout;
     private TextView[] mDots;
     private SliderAdapter mSliderAdapter;
+
+    Dialog mDialog;
 
     // Navigation Buttons
     private Button startButton;
@@ -36,6 +45,8 @@ public class OnboardingActivity extends AppCompatActivity {
 
         mSlideViewPager = (ViewPager) findViewById(R.id.slideViewPager);
         mDotLayout = (LinearLayout) findViewById(R.id.dotsLayout);
+
+        mDialog = new Dialog(this);
 
         mSliderAdapter = new SliderAdapter(this);
         mSlideViewPager.setAdapter(mSliderAdapter);
@@ -67,6 +78,43 @@ public class OnboardingActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void giveBadge() {
+
+        // Insert
+        if (SessionData.currentUser.hasBadge(1)) {
+            return;
+        }
+        SessionData.mUsrBadgesDatabase.mUsrBadgesDao().insertSingleBadge(new UsrBadges(SessionData.currentUser.getUserName(), 1));
+
+        Badges badge = SessionData.mBadgeDatabase.mBadgeDao().fetchBadgeByID(1);
+        ImageView badgeImage;
+        TextView badgeTitle;
+        TextView badgeDescription;
+        Button popupBack;
+
+        mDialog.setContentView(R.layout.popup_badge_earned);
+
+        badgeImage = (ImageView) mDialog.findViewById(R.id.badge_image);
+        badgeTitle = (TextView) mDialog.findViewById(R.id.badge_title);
+        badgeDescription = (TextView) mDialog.findViewById(R.id.badge_description);
+
+        popupBack = (Button) mDialog.findViewById(R.id.popup_back);
+
+        popupBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDialog.dismiss();
+            }
+        });
+
+        badgeImage.setImageResource(ImageBank.badges[badge.getIcon()]);
+        badgeTitle.setText(badge.getName());
+        badgeDescription.setText(badge.getDescription());
+
+        mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+        mDialog.show();
     }
 
     public void onStartButtonPress(View view) {
@@ -134,6 +182,8 @@ public class OnboardingActivity extends AppCompatActivity {
                 startButton.setEnabled(true);
                 startButton.setVisibility(View.VISIBLE);
                 startButton.setAnimation(btnAnimation);
+
+                giveBadge();
 
             } else {
 

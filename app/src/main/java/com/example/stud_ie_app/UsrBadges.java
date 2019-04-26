@@ -8,19 +8,11 @@ import android.support.annotation.NonNull;
 
 @Entity (primaryKeys = {"username", "badgeID"})
 public class UsrBadges {
-//    @NonNull
-//    @PrimaryKey
-//    private String UsrBadgeID;
+
     @NonNull
     private String username;
     @NonNull
     private int badgeID;
-
-//    public UsrBadges(String usrBadgeID, String username, int badgeID) {
-//        this.UsrBadgeID = username + badgeID;
-//        this.username = username;
-//        this.BadgeID = badgeID;
-//    }
 
 
     public UsrBadges(@NonNull String username, int badgeID) {
@@ -31,15 +23,6 @@ public class UsrBadges {
     @Ignore
     public UsrBadges() {
     }
-
-//    @NonNull
-//    public String getUsrBadgeID() {
-//        return UsrBadgeID;
-//    }
-//
-//    public void setUsrBadgeID(@NonNull String usrBadgeID) {
-//        UsrBadgeID = usrBadgeID;
-//    }
 
     public String getUsername() {
         return username;

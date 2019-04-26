@@ -68,9 +68,6 @@ public class RegistrationTwoActivity extends AppCompatActivity {
     }
 
     public void onSubmitButtonPress(View view) {
-        //TODO: Add Login Checks
-//        System.out.println(String.format("LOGIN DETAILS PASSED \nUsername: %s \nPassword: %s \nPasswrod: %s",
-//                newUsername.getText(), newPasswordOne.getText(), newPasswordTwo.getText()));
 
         //create user
         new Thread(new Runnable() {
