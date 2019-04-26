@@ -277,11 +277,13 @@ public class QuestionActivity extends AppCompatActivity {
         popupWord = (TextView) mDialog.findViewById(R.id.popup_word);
         popupBack = (Button) mDialog.findViewById(R.id.popup_back);
 
+        // Setup RecyclerView
         sentencesRecyclerView = (RecyclerView) mDialog.findViewById(R.id.popup_sentencesRecyclerView);
         sentencesRecyclerView.setHasFixedSize(true);
         SentencesRecyclerViewAdapter recyclerViewAdapter = new SentencesRecyclerViewAdapter(mDialog.getContext(), wordSentences);
         sentencesRecyclerView.setLayoutManager(new LinearLayoutManager(mDialog.getContext()));
         sentencesRecyclerView.setAdapter(recyclerViewAdapter);
+
         popupBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

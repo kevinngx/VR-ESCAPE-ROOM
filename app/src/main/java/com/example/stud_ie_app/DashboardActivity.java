@@ -10,6 +10,8 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +24,10 @@ import com.example.stud_ie_app.DashboardFragments.FragmentQuiz;
 import com.example.stud_ie_app.DashboardFragments.FragmentUser;
 import com.example.stud_ie_app.DatabaseClasses.ImageBank;
 import com.example.stud_ie_app.DatabaseClasses.SessionData;
+import com.example.stud_ie_app.RecyclerViewAdapters.BadgeRecyclerViewAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -31,6 +37,7 @@ public class DashboardActivity extends AppCompatActivity {
     private TabLayout dashboardTabLayout;
     private AppBarLayout dashboardAppBarLayout;
     private ViewPager dashboardViewPager;
+    private List<Badges> mBadges;
 
     Dialog mDialog;
 
@@ -118,9 +125,10 @@ public class DashboardActivity extends AppCompatActivity {
         Log.d(TAG, "onUpdateRole: pressed");
         mDialog.setContentView(R.layout.popup_update_role);
 
-        // Set onClickListeners
         Button popupBack = (Button) mDialog.findViewById(R.id.popup_back);
         Button popupSubmit = (Button) mDialog.findViewById(R.id.popup_submit);
+
+        RecyclerView badgeRecyclerView;
 
         updateAvatar = (ImageView) mDialog.findViewById(R.id.update_avatar);
         updateUsername = (TextView) mDialog.findViewById(R.id.update_username);
@@ -131,6 +139,14 @@ public class DashboardActivity extends AppCompatActivity {
         updateUsername.setText(SessionData.currentUser.getUserName());
         updateRole.setText(SessionData.currentUser.getRole());
         updatePoints.setText(Integer.toString(SessionData.currentUser.getScore()));
+
+        // Setup RecyclerView
+        getUserBadges();
+        badgeRecyclerView = (RecyclerView) mDialog.findViewById(R.id.role_recyclerView);
+        badgeRecyclerView.setHasFixedSize(true);
+        BadgeRecyclerViewAdapter recyclerViewAdapter = new BadgeRecyclerViewAdapter(mDialog.getContext(), mBadges);
+        badgeRecyclerView.setLayoutManager(new LinearLayoutManager(mDialog.getContext(), LinearLayoutManager.HORIZONTAL, false));
+        badgeRecyclerView.setAdapter(recyclerViewAdapter);
 
         popupBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,10 +162,20 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
+        
+
         // Launch dialog window
         mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
         mDialog.show();
 
+    }
+
+    private void getUserBadges() {
+        List<UsrBadges> userBadges = SessionData.mUsrBadgesDatabase.mUsrBadgesDao().getAllBadgesByUser(SessionData.currentUser.getUserName());
+        mBadges = new ArrayList<Badges>();
+        for (int i = 0; i < userBadges.size(); i++) {
+            mBadges.add(SessionData.mBadgeDatabase.mBadgeDao().fetchBadgeByID(userBadges.get(i).getBadgeID()));
+        }
     }
 
     public void onUpdateAvatarButtonClick(View view) {
