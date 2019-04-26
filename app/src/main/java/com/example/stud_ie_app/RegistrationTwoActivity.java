@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.stud_ie_app.DatabaseClasses.ImageBank;
 import com.example.stud_ie_app.DatabaseClasses.SessionData;
 
 public class RegistrationTwoActivity extends AppCompatActivity {
@@ -40,28 +41,28 @@ public class RegistrationTwoActivity extends AppCompatActivity {
         System.out.println("id is: " + view.getId());
 
         // Find avatar
-        int[][] avatars = {
-                {R.id.avatar_zero, R.drawable.avatar0},
-                {R.id.avatar_one, R.drawable.avatar1},
-                {R.id.avatar_two, R.drawable.avatar2},
-                {R.id.avatar_three, R.drawable.avatar3},
-                {R.id.avatar_four, R.drawable.avatar4},
-                {R.id.avatar_five, R.drawable.avatar5},
-                {R.id.avatar_six, R.drawable.avatar6},
-                {R.id.avatar_seven, R.drawable.avatar7},
-                {R.id.avatar_eight, R.drawable.avatar8}
+        int[] avatars = {
+                R.id.avatar_zero,
+                R.id.avatar_one,
+                R.id.avatar_two,
+                R.id.avatar_three,
+                R.id.avatar_four,
+                R.id.avatar_five,
+                R.id.avatar_six,
+                R.id.avatar_seven,
+                R.id.avatar_eight,
         };
 
-        newAvatar = 0;
+        int newAvatar = 0;
         while (newAvatar < avatars.length) {
-            if (view.getId() == avatars[newAvatar][0])
+            if (view.getId() == avatars[newAvatar])
                 break;
             newAvatar++;
         }
         System.out.println("Selected avatar: " + newAvatar);
 
         // Update Employee id_card
-        id_image.setImageResource(avatars[newAvatar][1]);
+        id_image.setImageResource(ImageBank.avatars[newAvatar]);
 
 
     }

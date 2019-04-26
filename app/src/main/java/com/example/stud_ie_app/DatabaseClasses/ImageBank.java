@@ -16,6 +16,30 @@ public class ImageBank {
     };
 
     public static int[] badges = {
-
+            1, // Filler
+            R.drawable.badge_intern, //1
+            R.drawable.badge_graduate, //2
+            R.drawable.badge_senior, //3
+            R.drawable.badge_manager, //4
+            R.drawable.badge_exec, //5
+            R.drawable.category_beach, // 6
+            R.drawable.category_transport, //7
+            R.drawable.category_animals, //8
+            R.drawable.category_sports, //9
+            R.drawable.category_jobs, //10
+            R.drawable.category_weather, //11
+            R.drawable.category_nature, //12
+            R.drawable.category_music, //13
+            R.drawable.category_exercise, //14
+            R.drawable.category_politics, //15
+            R.drawable.category_astronomy, //16
+            R.drawable.badge_hustler, //17
+            R.drawable.badge_genius, //18
+            R.drawable.badge_linkedin_stalker, //19
+            R.drawable.badge_curious_learner, //20
+            R.drawable.badge_fired, //21
+            R.drawable.badge_two_faced, //22
+            R.drawable.badge_cyber_security_specialist, //23
+            R.drawable.badge_the_prodigy //24
     };
 }

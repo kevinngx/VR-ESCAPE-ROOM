@@ -27,6 +27,7 @@ public class CreateData {
             badgesList.add(new Badges(3, "Senior", "Reach 5,000 points!", 3));
             badgesList.add(new Badges(4, "Manager", "Reach 10,000 points!", 4));
             badgesList.add(new Badges(5, "Exec", "Reach 25,000,000 points!", 5));
+            badgesList.add(new Badges(6, "Beach Guru", "5 correct in one session: Beach", 5));
             badgesList.add(new Badges(7, "Transport Guru", "5 correct in one session: Transport", 7));
             badgesList.add(new Badges(8, "Animal Guru", "5 correct in one session: Animals", 8));
             badgesList.add(new Badges(9, "Sports Guru", "5 correct in one session: Sports", 9));
