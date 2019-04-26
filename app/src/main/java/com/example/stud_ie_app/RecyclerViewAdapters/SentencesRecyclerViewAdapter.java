@@ -1,4 +1,4 @@
-package com.example.stud_ie_app;
+package com.example.stud_ie_app.RecyclerViewAdapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.stud_ie_app.R;
 
 import java.util.List;
 

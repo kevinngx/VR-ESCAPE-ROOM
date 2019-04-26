@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.stud_ie_app.DatabaseClasses.SessionData;
+
 public class RegistrationTwoActivity extends AppCompatActivity {
 
     ImageView id_image;

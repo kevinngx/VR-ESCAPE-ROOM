@@ -1,4 +1,4 @@
-package com.example.stud_ie_app;
+package com.example.stud_ie_app.RecyclerViewAdapters;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -10,6 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.stud_ie_app.R;
+import com.example.stud_ie_app.DatabaseClasses.SessionData;
+import com.example.stud_ie_app.Users;
 
 import java.util.List;
 

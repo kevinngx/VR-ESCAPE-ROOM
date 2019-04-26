@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.stud_ie_app.ApiClasses.OxfordApiHelper;
+import com.example.stud_ie_app.DatabaseClasses.SessionData;
+import com.example.stud_ie_app.RecyclerViewAdapters.SentencesRecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;

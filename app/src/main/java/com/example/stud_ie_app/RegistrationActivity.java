@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.stud_ie_app.DatabaseClasses.SessionData;
+
 public class RegistrationActivity extends AppCompatActivity {
 
     public final static String NEW_USERNAME ="com.example.stud_ie_app.new_username";

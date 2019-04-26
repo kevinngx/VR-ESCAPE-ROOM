@@ -103,8 +103,8 @@
                     android:padding="16dp">
 
                     <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:src="@drawable/category_transport" />
 
                     <TextView
@@ -140,9 +140,9 @@
                     android:padding="16dp">
 
                     <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:src="@drawable/category_animals" />
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/category_beach" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -226,8 +226,8 @@
                     android:padding="16dp">
 
                     <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:src="@drawable/category_sports" />
 
                     <TextView
@@ -263,8 +263,8 @@
                     android:padding="16dp">
 
                     <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:src="@drawable/category_jobs" />
 
                     <TextView
@@ -349,8 +349,8 @@
                     android:padding="16dp">
 
                     <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:src="@drawable/category_weather" />
 
                     <TextView
@@ -386,8 +386,8 @@
                     android:padding="16dp">
 
                     <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:src="@drawable/category_nature" />
 
                     <TextView
@@ -472,8 +472,8 @@
                     android:padding="16dp">
 
                     <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:src="@drawable/category_music" />
 
                     <TextView
@@ -509,8 +509,8 @@
                     android:padding="16dp">
 
                     <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:src="@drawable/category_exercise" />
 
                     <TextView
@@ -595,8 +595,8 @@
                     android:padding="16dp">
 
                     <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:src="@drawable/category_politics" />
 
                     <TextView
@@ -632,8 +632,8 @@
                     android:padding="16dp">
 
                     <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:src="@drawable/category_astronomy" />
 
                     <TextView

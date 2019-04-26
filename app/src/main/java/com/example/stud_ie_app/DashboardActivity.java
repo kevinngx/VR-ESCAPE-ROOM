@@ -1,27 +1,36 @@
 package com.example.stud_ie_app;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.stud_ie_app.DashboardFragments.FragmentLeaderboard;
 import com.example.stud_ie_app.DashboardFragments.FragmentQuiz;
 import com.example.stud_ie_app.DashboardFragments.FragmentUser;
-
-import retrofit2.http.HEAD;
+import com.example.stud_ie_app.DatabaseClasses.ImageBank;
+import com.example.stud_ie_app.DatabaseClasses.SessionData;
 
 public class DashboardActivity extends AppCompatActivity {
+
+    private static final String TAG = "DashboardActivity";
 
     public static final String CATEGORY = "category";
     private TabLayout dashboardTabLayout;
     private AppBarLayout dashboardAppBarLayout;
     private ViewPager dashboardViewPager;
+
+    Dialog mDialog;
 
     ImageView userAvatar;
     TextView userUsername;
@@ -48,6 +57,9 @@ public class DashboardActivity extends AppCompatActivity {
         dashboardViewPager.setAdapter(adapter);
         dashboardTabLayout.setupWithViewPager(dashboardViewPager);
 
+        // Set up dialog popup
+        mDialog = new Dialog(this);
+
         setupUserId();
     }
 
@@ -58,33 +70,11 @@ public class DashboardActivity extends AppCompatActivity {
         userRole = (TextView) findViewById(R.id.user_role);
         userScore = (TextView) findViewById(R.id.user_score);
 
-        int[] avatars = {
-                R.drawable.avatar0,
-                R.drawable.avatar1,
-                R.drawable.avatar2,
-                R.drawable.avatar3,
-                R.drawable.avatar4,
-                R.drawable.avatar5,
-                R.drawable.avatar6,
-                R.drawable.avatar7,
-                R.drawable.avatar8,
-        };
-
-        userAvatar.setImageResource(avatars[SessionData.currentUser.getAvatar()]);
+        userAvatar.setImageResource(ImageBank.avatars[SessionData.currentUser.getAvatar()]);
         userUsername.setText(SessionData.currentUser.getUserName());
         userRole.setText(SessionData.currentUser.getRole());
         userScore.setText(Integer.toString(SessionData.currentUser.getScore()));
 
-    }
-
-    public void onLogoutButtonClick(View view) {
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-    }
-
-    public void onOnbardingButtonClick(View view) {
-        Intent intent = new Intent(this, OnboardingActivity.class);
-        startActivity(intent);
     }
 
     public void onLevelSelect(View view) {
@@ -102,29 +92,64 @@ public class DashboardActivity extends AppCompatActivity {
                 R.id.level_astronomy // 9
         };
 
-        String[] levelName = {
-                "Transport",
-                "Beach",
-                "Circus",
-                "Jobs",
-                "Weather",
-                "Nature",
-                "Music",
-                "Exercise",
-                "Politics",
-                "Astronomy"
-        };
-
         int levelId = 0;
         while (levelId < levels.length) {
             if (view.getId() == levels[levelId])
                 break;
             levelId++;
         }
-        System.out.println("Level Selected: " + levelName[levelId]);
+        System.out.println("Level Selected: " + QuestionBank.categories[levelId]);
 
         Intent intent = new Intent(this, QuestionActivity.class);
-        intent.putExtra(CATEGORY, levelName[levelId]);
+        intent.putExtra(CATEGORY, QuestionBank.categories[levelId]);
+        startActivity(intent);
+    }
+
+    public void onUpdateRoleButtonClick(View view) {
+        Log.d(TAG, "onUpdateRole: pressed");
+        mDialog.setContentView(R.layout.popup_update_role);
+
+        // Set onClickListeners
+        Button popupBack = (Button) mDialog.findViewById(R.id.popup_back);
+        Button popupSubmit = (Button) mDialog.findViewById(R.id.popup_submit);
+
+        popupBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDialog.dismiss();
+            }
+        });
+
+        popupSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("Submit Changes");
+            }
+        });
+
+        // Launch dialog window
+        mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+        mDialog.show();
+
+    }
+
+    public void onUpdateAvatarButtonClick(View view) {
+        Log.d(TAG, "onUpdateAvatar: pressed");
+    }
+
+    public void onUpdatePasswordButtonClick(View view) {
+        Log.d(TAG, "onUpdatePassword: pressed");
+    }
+
+    public void onLogoutButtonClick(View view) {
+        Log.d(TAG, "onLogoutButtonClick: pressed");
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
+    public void onOnbardingButtonClick(View view) {
+        Log.d(TAG, "onOnbardingButtonClick: pressed");
+        Intent intent = new Intent(this, OnboardingActivity.class);
         startActivity(intent);
     }
 }

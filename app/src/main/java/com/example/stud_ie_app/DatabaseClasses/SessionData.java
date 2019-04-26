@@ -1,4 +1,4 @@
-package com.example.stud_ie_app;
+package com.example.stud_ie_app.DatabaseClasses;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
@@ -8,12 +8,15 @@ import android.view.View;
 import com.example.stud_ie_app.DatabaseClasses.BadgeDatabase;
 import com.example.stud_ie_app.DatabaseClasses.UserDatabase;
 import com.example.stud_ie_app.DatabaseClasses.UsrBadgesDatabase;
+import com.example.stud_ie_app.Users;
 
 public class SessionData {
     public static Users currentUser = new Users("Kevin", "password", 1);
     public static UserDatabase mUserDatabase;
     public static BadgeDatabase mBadgeDatabase;
     public static UsrBadgesDatabase mUsrBadgesDatabase;
+
+
     public static void createDB(Context context){
 
          mUserDatabase = Room.databaseBuilder(context.getApplicationContext(),

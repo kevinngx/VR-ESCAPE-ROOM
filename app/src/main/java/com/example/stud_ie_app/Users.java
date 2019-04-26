@@ -20,7 +20,7 @@ public class Users {
             this.userName = userName;
             this.password = password;
             this.score = 0;
-            this.role = "intern";
+            this.role = "Intern";
             this.avatar = avatar;
 
     }

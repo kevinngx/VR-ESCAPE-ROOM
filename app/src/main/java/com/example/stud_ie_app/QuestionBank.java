@@ -12,29 +12,41 @@ public class QuestionBank {
     ArrayList<String> words;
     ArrayList<String> sentences;
     ArrayList<Options> options;
+    public static String[] categories = {
+            "Transport",
+            "Beach",
+            "Circus",
+            "Jobs",
+            "Weather",
+            "Nature",
+            "Music",
+            "Exercise",
+            "Politics",
+            "Astronomy"
+    };
 
     public static int getScore(String category) {
         switch (category) {
             case "Transport":
                 return 100;
             case "Beach":
-                return 200;
+                return 100;
             case "Circus":
-                return 300;
+                return 200;
             case "Jobs":
-                return 400;
+                return 200;
             case "Weather":
-                return 500;
+                return 300;
             case "Nature":
-                return 600;
+                return 300;
             case "Music":
-                return 700;
+                return 400;
             case "Exercise":
-                return 800;
+                return 400;
             case "Politics":
-                return 900;
+                return 500;
             case "Astronomy":
-                return 1000;
+                return 500;
         }
         return 0;
     }

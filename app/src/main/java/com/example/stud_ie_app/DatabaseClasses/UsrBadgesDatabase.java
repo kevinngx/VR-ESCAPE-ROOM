@@ -5,7 +5,6 @@ import android.arch.persistence.room.RoomDatabase;
 
 
 import com.example.stud_ie_app.UsrBadges;
-import com.example.stud_ie_app.UsrBadgesDao;
 
 
 @Database(entities = {UsrBadges.class}, version = 1, exportSchema = false)

@@ -39,20 +39,20 @@ public class FragmentUser extends Fragment {
 
     }
 
-    public void ShowPopup(View v) {
-        TextView txtclose;
-        Button btnFollow;
-        myDialog.setContentView(R.layout.user_fragment);
-        txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
-        txtclose.setText("M");
-        btnFollow = (Button) myDialog.findViewById(R.id.btnfollow);
-        txtclose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myDialog.dismiss();
-            }
-        });
-        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        myDialog.show();
-    }
+//    public void ShowPopup(View v) {
+//        TextView txtclose;
+//        Button btnFollow;
+//        myDialog.setContentView(R.layout.user_fragment);
+//        txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
+//        txtclose.setText("M");
+//        btnFollow = (Button) myDialog.findViewById(R.id.btnfollow);
+//        txtclose.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                myDialog.dismiss();
+//            }
+//        });
+//        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//        myDialog.show();
+//    }
 }
