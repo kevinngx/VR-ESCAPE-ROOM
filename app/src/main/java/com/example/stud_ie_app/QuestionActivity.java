@@ -12,9 +12,11 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.stud_ie_app.ApiClasses.OxfordApiHelper;
+import com.example.stud_ie_app.DatabaseClasses.ImageBank;
 import com.example.stud_ie_app.DatabaseClasses.SessionData;
 import com.example.stud_ie_app.RecyclerViewAdapters.SentencesRecyclerViewAdapter;
 
@@ -170,9 +172,62 @@ public class QuestionActivity extends AppCompatActivity {
             pointsAllocation.setText(String.format("+%s points!", Integer.toString(score)));
             SessionData.currentUser.setScore(SessionData.currentUser.getScore() + score);
             SessionData.mUserDatabase.mUserDao().updateScore(score, SessionData.currentUser.getUserName());
+            checkLevelBadge(score);
         } else {
             pointsAllocation.setText("Incorrect Answer");
         }
+    }
+
+    private void checkLevelBadge(int score) {
+        // This will check the promotion related badges
+        if (SessionData.currentUser.getScore() < 1000 && (SessionData.currentUser.getScore() + score) >= 1000) {
+            giveBadge(2); // Promoted to Graduate
+        }
+
+        if (SessionData.currentUser.getScore() < 5000 && (SessionData.currentUser.getScore() + score) >= 5000) {
+            giveBadge(3); // Promoted to Senior
+        }
+
+        if (SessionData.currentUser.getScore() < 10000 && (SessionData.currentUser.getScore() + score) >= 10000) {
+            giveBadge(4); // Promoted to Manager
+        }
+
+        if (SessionData.currentUser.getScore() < 25000 && (SessionData.currentUser.getScore() + score) >= 25000) {
+            giveBadge(5); // Promoted to Exec
+        }
+
+    }
+
+    private void giveBadge(int badgeId) {
+        Badges badge = SessionData.mBadgeDatabase.mBadgeDao().fetchBadgeByID(badgeId);
+        ImageView badgeImage;
+        TextView badgeTitle;
+        TextView badgeDescription;
+        Button popupBack;
+
+        mDialog.setContentView(R.layout.popup_badge_earned);
+
+        badgeImage = (ImageView) mDialog.findViewById(R.id.badge_image);
+        badgeTitle = (TextView) mDialog.findViewById(R.id.badge_title);
+        badgeDescription = (TextView) mDialog.findViewById(R.id.badge_description);
+
+        popupBack = (Button) mDialog.findViewById(R.id.popup_back);
+
+        popupBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDialog.dismiss();
+            }
+        });
+
+        badgeImage.setImageResource(ImageBank.badges[badge.getIcon()]);
+        badgeTitle.setText(badge.getName());
+        badgeDescription.setText(badge.getDescription());
+
+        SessionData.mUsrBadgesDatabase.mUsrBadgesDao().insertSingleBadge(new UsrBadges(SessionData.currentUser.getUserName(),badgeId));
+
+        mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+        mDialog.show();
     }
 
     private int getAnswerSelected(View selectedCard) {

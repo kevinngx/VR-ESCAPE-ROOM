@@ -16,7 +16,10 @@ public class SessionData {
     public static BadgeDatabase mBadgeDatabase;
     public static UsrBadgesDatabase mUsrBadgesDatabase;
 
+    public static void refreshSessionStats() {
 
+    }
+    
     public static void createDB(Context context){
 
          mUserDatabase = Room.databaseBuilder(context.getApplicationContext(),
