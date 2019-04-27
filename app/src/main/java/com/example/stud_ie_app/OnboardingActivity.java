@@ -29,6 +29,7 @@ public class OnboardingActivity extends AppCompatActivity {
     private TextView[] mDots;
     private SliderAdapter mSliderAdapter;
 
+    // Dialog object for badge display
     Dialog mDialog;
 
     // Navigation Buttons
@@ -43,16 +44,16 @@ public class OnboardingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_onboarding);
 
+        // Setting up SlidersView
+
         mSlideViewPager = (ViewPager) findViewById(R.id.slideViewPager);
         mDotLayout = (LinearLayout) findViewById(R.id.dotsLayout);
-
-        mDialog = new Dialog(this);
-
         mSliderAdapter = new SliderAdapter(this);
         mSlideViewPager.setAdapter(mSliderAdapter);
-
         addDotsIndicator(0);
         mSlideViewPager.addOnPageChangeListener(viewListener);
+
+        mDialog = new Dialog(this);
 
         // Setting up navigation buttons
 
@@ -81,13 +82,13 @@ public class OnboardingActivity extends AppCompatActivity {
     }
 
     private void giveBadge() {
-
-        // Insert
+        // Checks if the user has the onboarding badge yet
         if (SessionData.currentUser.hasBadge(1)) {
             return;
         }
         SessionData.mUsrBadgesDatabase.mUsrBadgesDao().insertSingleBadge(new UsrBadges(SessionData.currentUser.getUserName(), 1));
 
+        // Prepares the badge dialog window and launches it
         Badges badge = SessionData.mBadgeDatabase.mBadgeDao().fetchBadgeByID(1);
         ImageView badgeImage;
         TextView badgeTitle;
@@ -118,6 +119,7 @@ public class OnboardingActivity extends AppCompatActivity {
     }
 
     public void onStartButtonPress(View view) {
+        // Activates the start button only on the last page
         if (currentPage == (mDots.length - 1)) {
             Intent intent = new Intent(this, DashboardActivity.class);
             startActivity(intent);
@@ -125,6 +127,7 @@ public class OnboardingActivity extends AppCompatActivity {
     }
 
     public void addDotsIndicator(int position) {
+        // Prepares the dots displayed for navigation purposes on the bottom of the screen
         mDots = new TextView[5];
         mDotLayout.removeAllViews();
 
@@ -145,12 +148,11 @@ public class OnboardingActivity extends AppCompatActivity {
     ViewPager.OnPageChangeListener viewListener = new ViewPager.OnPageChangeListener() {
         @Override
         public void onPageScrolled(int i, float v, int i1) {
-
-
         }
 
         @Override
         public void onPageSelected(int i) {
+            // Actions depending on what the active page is
             addDotsIndicator(i);
             currentPage = i;
 

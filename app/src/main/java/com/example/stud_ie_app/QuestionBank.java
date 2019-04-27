@@ -10,8 +10,6 @@ public class QuestionBank {
 
     String category;
     ArrayList<String> words;
-    ArrayList<String> sentences;
-    ArrayList<Options> options;
     public static String[] categories = {
             "Transport",
             "Beach",
@@ -26,32 +24,34 @@ public class QuestionBank {
     };
 
     public static int getScore(String category) {
+        // Returns the score value of the questions
         switch (category) {
             case "Transport":
                 return 100;
             case "Beach":
-                return 100;
+                return 150;
             case "Circus":
                 return 200;
             case "Jobs":
-                return 200;
+                return 250;
             case "Weather":
                 return 300;
             case "Nature":
-                return 300;
+                return 350;
             case "Music":
                 return 400;
             case "Exercise":
-                return 400;
+                return 450;
             case "Politics":
                 return 500;
             case "Astronomy":
-                return 500;
+                return 550;
         }
         return 0;
     }
 
     public static ArrayList<String> getOptionsFromWordBank(String category, String word) {
+        // Returns a randomized list of words from a category, excluding the input word to be used as question options
         ArrayList<String> categoryBank = getWordsBank(category);
         Collections.shuffle(categoryBank);
         for (int i = 0; i < categoryBank.size(); i++) {
@@ -63,6 +63,9 @@ public class QuestionBank {
     }
 
     public class Options {
+        // Used to pull synonyms of the word to be used as options
+        // NOTE: this was replaced by getOptionsFromWordBank as using the API slowed the app too much,
+        // even when run asynchronously, so had to replace with existing word bank.
         ArrayList<String> options;
         public Options(String word) {
             ArrayList<String> synonyms;
@@ -88,11 +91,8 @@ public class QuestionBank {
 
     }
 
-    public int getQuestionBankSize() {
-        return words.size();
-    }
-
     public static ArrayList<String> getWordsBank(String category) {
+        // Questionbank for the app
         ArrayList<String> wordBank = new ArrayList<>();
         switch (category) {
             case "Transport":
@@ -220,6 +220,7 @@ public class QuestionBank {
     }
 
     public static ArrayList<String> getSentencesBank(String category) {
+        // Sentence bank for the app
         ArrayList<String> sentenceList = new ArrayList<>();
         switch (category) {
             case "Transport":

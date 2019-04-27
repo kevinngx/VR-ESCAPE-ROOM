@@ -34,7 +34,7 @@ public class QuestionActivity extends AppCompatActivity {
 
     TextView questionCategory;
     TextView displaySentence;
-    CardView seeWordList;
+    CardView seeSentenceList;
 
     CardView[] answers = new CardView[4];
     TextView[] options = new TextView[4];
@@ -61,39 +61,44 @@ public class QuestionActivity extends AppCompatActivity {
         pointsCard = (CardView) findViewById(R.id.points_card);
         pointsAllocation= (TextView) findViewById(R.id.points_allocation);
 
+        // Options Array
         options[0] = (TextView) findViewById(R.id.question_optionA);
         options[1] = (TextView) findViewById(R.id.question_optionB);
         options[2] = (TextView) findViewById(R.id.question_optionC);
         options[3] = (TextView) findViewById(R.id.question_optionD);
 
+        // Answers Array
         answers[0] = (CardView) findViewById(R.id.question_answerA);
         answers[1] = (CardView) findViewById(R.id.question_answerB);
         answers[2] = (CardView) findViewById(R.id.question_answerC);
         answers[3] = (CardView) findViewById(R.id.question_answerD);
 
-        seeWordList = (CardView) findViewById(R.id.btn_seeWordList);
+        seeSentenceList = (CardView) findViewById(R.id.btn_seeWordList);
+
         mDialog = new Dialog(this);
 
-        // Sets up level settings
+        // Sets up level using category retrieved from the dashboard activity
         category = getIntent().getExtras().get(DashboardActivity.CATEGORY).toString();
         questionCategory.setText(category);
-        Log.d(TAG, "onCreate: Category is: " + category);
         wordBank = QuestionBank.getWordsBank(category);
         sentenceBank = QuestionBank.getSentencesBank(category);
-        Log.d(TAG, "onCreate: Word Bank downloaded");
         refreshQuestion();
 
     }
 
     private void refreshQuestion() {
+        // Clear stage for new question
         enableAnswers(true);
-        // Set up current question
         clearCardColors();
-        seeWordList.setVisibility(View.INVISIBLE);
-        seeWordList.setEnabled(false);
+        seeSentenceList.setVisibility(View.INVISIBLE);
+        seeSentenceList.setEnabled(false);
         pointsCard.setVisibility(View.INVISIBLE);
+
+        // Set up new question
         String word = wordBank.get(currentQuestion);
         displaySentence.setText(getSentenceWithoutWord(sentenceBank.get(currentQuestion), word));
+        // Code snipped below uses an API to pull the sentence
+        // This was replaced for performance reasons as the API was deemed to slow for enjoyable use.
 //        wordSentences = getWordSentences(word);
 //        displaySentence.setText(getSentenceWithoutWord(wordSentences.get(0), word));
         getOptions(word);
@@ -101,6 +106,7 @@ public class QuestionActivity extends AppCompatActivity {
     }
 
     private ArrayList<String> getWordSentences(String word) {
+        // This pulls a sentence from the oxford API given a word
         try {
             return OxfordApiHelper.getSentenceList(word);
         } catch (ExecutionException e) {
@@ -113,9 +119,12 @@ public class QuestionActivity extends AppCompatActivity {
 
     // Get synonyms from the API and display it to the user
     private void getOptions(String word) {
-//        ArrayList<String> synonyms;
         ArrayList<String> optionText = new ArrayList<>();
 
+        // The following gets synonyms pulled from the Oxford API
+        // This was removed for performance reasons, even though it does still work
+
+//        ArrayList<String> synonyms;
 //        // Set the current answer
 //        try {
 //            synonyms = OxfordApiHelper.getSynonyms(word);
@@ -140,7 +149,7 @@ public class QuestionActivity extends AppCompatActivity {
 //            e.printStackTrace();
 //        }
 
-
+        // Gets other options and shuffle it together with the correct word and display them as options;
         ArrayList<String> otherOptions = QuestionBank.getOptionsFromWordBank(category, word);
         for (int i = 0; i < 3; i++) {
             optionText.add(otherOptions.get(i));
@@ -152,13 +161,15 @@ public class QuestionActivity extends AppCompatActivity {
         for (int i = 0; i < 4; i++) {
             options[i].setText(optionText.get(i));
             if (optionText.get(i).equals(word)) {
-                currentAnswer = i;
+                currentAnswer = i; // Tells us the index of the card the correct answer is placed in
             }
         }
-
     }
 
     private String getSentenceWithoutWord(String sentence, String word) {
+        // Regex to remove a word from a sentece, also takes into account other usages of the word
+        // e.g. run --> running, plane --> planes, land --> landed
+
         String regex = String.format("\\s*\\b%s\\b\\s*", word);
         String result = sentence.replaceAll(regex, " [    ?    ] ");
 
@@ -177,10 +188,12 @@ public class QuestionActivity extends AppCompatActivity {
         System.out.println(result);
 
         return result;
-
     }
 
     public void onAnswerSelect(View view) {
+        // Reacts to when an answer is selected.
+
+        // Disable other options
         enableAnswers(false);
 
         // Mark answer
@@ -188,8 +201,8 @@ public class QuestionActivity extends AppCompatActivity {
         markAnswer(answer);
 
         pointsCard.setVisibility(View.VISIBLE);
-        seeWordList.setVisibility(View.VISIBLE);
-        seeWordList.setEnabled(true);
+        seeSentenceList.setVisibility(View.VISIBLE);
+        seeSentenceList.setEnabled(true);
 
         setCardColor(answer);
     }
@@ -286,9 +299,11 @@ public class QuestionActivity extends AppCompatActivity {
 
     private void giveBadge(int badgeId) {
         // Does not give badge if the user already has it
-        if (badgeExists(badgeId)) {
+        if (SessionData.currentUser.hasBadge(badgeId)) {
             return;
         }
+
+        // Opens up the dialog window informing them of their badge earned
         Badges badge = SessionData.mBadgeDatabase.mBadgeDao().fetchBadgeByID(badgeId);
         ImageView badgeImage;
         TextView badgeTitle;
@@ -320,19 +335,9 @@ public class QuestionActivity extends AppCompatActivity {
         mDialog.show();
     }
 
-    private boolean badgeExists(int badgeId) {
-        //todo: check if the user already has the badge
-        boolean userHasBadge = false;
-        List<UsrBadges> userBadges = SessionData.mUsrBadgesDatabase.mUsrBadgesDao().getAllBadgesByUser(SessionData.currentUser.getUserName());
-        for (int i = 0; i < userBadges.size(); i++) {
-            if (userBadges.get(i).getBadgeID() == badgeId) {
-                userHasBadge = true;
-            }
-        }
-        return userHasBadge;
-    }
-
     private int getAnswerSelected(View selectedCard) {
+        // This method will return the index of the card selected
+
         // Get options
         int[] options = {
                 R.id.question_answerA, // 0
@@ -353,18 +358,20 @@ public class QuestionActivity extends AppCompatActivity {
     }
 
     private void enableAnswers(boolean state) {
+        // Re-enables all answers for selection in the next question
         for (int i = 0; i < answers.length; i++) {
             answers[i].setEnabled(state);
         }
     }
 
     public void setCardColor(int selectedAnswer) {
-        System.out.println("current answer: " + currentAnswer);
-        answers[selectedAnswer].setCardBackgroundColor(Color.parseColor("#F57C00"));
-        answers[currentAnswer].setCardBackgroundColor(Color.parseColor("#8BC34A"));
+        // Sets the color of the card of the selected answer and the correct color
+        answers[selectedAnswer].setCardBackgroundColor(Color.parseColor("#F57C00")); // Orange-ish red
+        answers[currentAnswer].setCardBackgroundColor(Color.parseColor("#8BC34A")); // Green
     }
 
     public void clearCardColors() {
+        // Resets the color of the answer cards
         for (int i = 0; i < 4; i++) {
             answers[i].setCardBackgroundColor(Color.WHITE);
         }
@@ -404,6 +411,7 @@ public class QuestionActivity extends AppCompatActivity {
     }
 
     public void onNextQuestion(View view) {
+        // If the last question is reached, open the summary window
         if (currentQuestion < wordBank.size() - 1) {
             currentQuestion++;
             refreshQuestion();

@@ -65,6 +65,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Intern"
+                        android:textAlignment="center"
                         android:textColor="@android:color/white"
                         android:textSize="18sp" />
 
@@ -189,9 +190,11 @@
 
                     <TextView
 
+                        android:id="@+id/heading_graduate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Graduate"
+                        android:textAlignment="center"
                         android:textColor="@android:color/white"
                         android:textSize="18sp" />
 
@@ -316,9 +319,11 @@
 
                     <TextView
 
+                        android:id="@+id/heading_senior"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Senior"
+                        android:textAlignment="center"
                         android:textColor="@android:color/white"
                         android:textSize="18sp" />
 
@@ -443,9 +448,11 @@
 
                     <TextView
 
+                        android:id="@+id/heading_manager"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Manager"
+                        android:textAlignment="center"
                         android:textColor="@android:color/white"
                         android:textSize="18sp" />
 
@@ -570,9 +577,11 @@
 
                     <TextView
 
+                        android:id="@+id/heading_executive"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Executive"
+                        android:textAlignment="center"
                         android:textColor="@android:color/white"
                         android:textSize="18sp" />
 

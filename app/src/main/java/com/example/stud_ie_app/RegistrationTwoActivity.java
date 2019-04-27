@@ -16,7 +16,7 @@ public class RegistrationTwoActivity extends AppCompatActivity {
     TextView id_username;
     String newUsername;
     String newPassword;
-    int newAvatar = 0;
+    int newAvatar = 0; // Default selection
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,21 +26,18 @@ public class RegistrationTwoActivity extends AppCompatActivity {
         id_image = (ImageView) findViewById(R.id.user_avatar);
         id_username = (TextView) findViewById(R.id.leaderboard_username);
 
+        // Retrieves data from previous activity
         Bundle bundle = getIntent().getExtras();
-
         newUsername = bundle.getString(RegistrationActivity.NEW_USERNAME);
         newPassword = bundle.getString(RegistrationActivity.NEW_PASSWORD);
 
-        System.out.println("username is: " + newUsername);
+        // Display username on card
         id_username.setText(newUsername);
 
     }
 
     public void onButtonPress(View view) {
-        System.out.println("Button Pressed");
-        System.out.println("id is: " + view.getId());
-
-        // Find avatar
+        // Array of CardViews containing avatars selected
         int[] avatars = {
                 R.id.avatar_zero,
                 R.id.avatar_one,
@@ -53,13 +50,13 @@ public class RegistrationTwoActivity extends AppCompatActivity {
                 R.id.avatar_eight,
         };
 
+        // Find avatar based on the index of the card selected
         int newAvatar = 0;
         while (newAvatar < avatars.length) {
             if (view.getId() == avatars[newAvatar])
                 break;
             newAvatar++;
         }
-        System.out.println("Selected avatar: " + newAvatar);
 
         // Update Employee id_card
         id_image.setImageResource(ImageBank.avatars[newAvatar]);
@@ -67,7 +64,7 @@ public class RegistrationTwoActivity extends AppCompatActivity {
     }
 
     public void onSubmitButtonPress(View view) {
-        //create user
+        //create user from credentials passed and adds them to the database using an async thread
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -77,11 +74,14 @@ public class RegistrationTwoActivity extends AppCompatActivity {
                 SessionData.currentUser = user;
             }
         }) .start();
+
+        // Goes to onboarding process
         Intent intent = new Intent(this, OnboardingActivity.class);
         startActivity(intent);
     }
 
     public void onBackToLoginButtonPress(View view) {
+        // Returns to login screen
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }

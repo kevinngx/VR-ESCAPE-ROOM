@@ -23,6 +23,13 @@ public class FragmentQuiz extends Fragment {
 
     View view;
 
+    // Ranking Titles
+    TextView graduateTitle;
+    TextView seniorTitle;
+    TextView managerTitle;
+    TextView executiveTitle;
+
+    // Level Images
     ImageView transportImage;
     ImageView beachImage;
     ImageView sportsImage;
@@ -34,6 +41,7 @@ public class FragmentQuiz extends Fragment {
     ImageView politicsImage;
     ImageView astronomyImage;
 
+    // Level Titles
     TextView transportTitle;
     TextView beachTitle;
     TextView circusTitle;
@@ -45,6 +53,7 @@ public class FragmentQuiz extends Fragment {
     TextView politicsTitle;
     TextView astronomyTitle;
 
+    // Level Cards
     CardView transportCard;
     CardView beachCard;
     CardView circusCard;
@@ -78,21 +87,25 @@ public class FragmentQuiz extends Fragment {
         unlockLevel(1);
 
         if (SessionData.currentUser.getScore() >= 1000) {
+            graduateTitle.setText("Graduate");
             unlockLevel(2);
             unlockLevel(3);
         }
 
         if (SessionData.currentUser.getScore() >= 5000) {
+            seniorTitle.setText("Senior");
             unlockLevel(4);
             unlockLevel(5);
         }
 
         if (SessionData.currentUser.getScore() >= 10000) {
+            managerTitle.setText("Manager");
             unlockLevel(6);
             unlockLevel(7);
         }
 
         if (SessionData.currentUser.getScore() >= 25000) {
+            executiveTitle.setText("Executive");
             unlockLevel(8);
             unlockLevel(9);
         }
@@ -110,6 +123,12 @@ public class FragmentQuiz extends Fragment {
 
 
     private void findViews() {
+        // Find Ranking Titles
+        graduateTitle = (TextView) view.findViewById(R.id.heading_graduate);
+        seniorTitle = (TextView) view.findViewById(R.id.heading_senior);
+        managerTitle = (TextView) view.findViewById(R.id.heading_manager);
+        executiveTitle = (TextView) view.findViewById(R.id.heading_executive);
+
         // Find ImageViews
         transportImage = (ImageView) view.findViewById(R.id.level_transport_image);
         beachImage = (ImageView) view.findViewById(R.id.level_beach_image);
@@ -175,30 +194,11 @@ public class FragmentQuiz extends Fragment {
         cards.add(exerciseCard);
         cards.add(politicsCard);
         cards.add(astronomyCard);
+
     }
 
     public void deactivateAll() {
-//        // Change Images
-//        sportsImage.setImageResource(R.drawable.level_locked);
-//        jobsImage.setImageResource(R.drawable.level_locked);
-//        weatherImage.setImageResource(R.drawable.level_locked);
-//        natureImage.setImageResource(R.drawable.level_locked);
-//        musicImage.setImageResource(R.drawable.level_locked);
-//        exerciseImage.setImageResource(R.drawable.level_locked);
-//        politicsImage.setImageResource(R.drawable.level_locked);
-//        astronomyImage.setImageResource(R.drawable.level_locked);
-//
-//        // Change Texts
-//        circusTitle.setText("Level Locked");
-//        jobsTitle.setText("Level Locked");
-//        weatherTitle.setText("Level Locked");
-//        natureTitle.setText("Level Locked");
-//        musicTitle.setText("Level Locked");
-//        exerciseTitle.setText("Level Locked");
-//        politicsTitle.setText("Level Locked");
-//        astronomyTitle.setText("Level Locked");
-
-        // Change Cards
+        // Lock all cards
         for (int i = 0; i < cards.size(); i++) {
             images.get(i).setImageResource(R.drawable.level_locked);
             titles.get(i).setText("Level Locked");
@@ -206,5 +206,9 @@ public class FragmentQuiz extends Fragment {
             cards.get(i).setCardBackgroundColor(Color.parseColor("#ABB4BE"));
         }
 
+        graduateTitle.setText("Earn 1,000 points to unlock Graduate Levels");
+        seniorTitle.setText("Earn 5,000 points to unlock Senior Levels");
+        managerTitle.setText("Earn 10,000 points to unlock Manager Levels");
+        executiveTitle.setText("Earn 25,000 points to unlock Executive Levels");
     }
 }

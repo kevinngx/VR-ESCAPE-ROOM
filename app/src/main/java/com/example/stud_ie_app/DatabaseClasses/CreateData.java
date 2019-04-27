@@ -20,15 +20,15 @@ public class CreateData {
         dummyUsers.add(new Users("Hulk", "password", 49000, 5, "Executive"));
         dummyUsers.add(new Users("Captain America", "password", 32000, 8, "Executive"));
         dummyUsers.add(new Users("Thor", "password", 26800, 7, "Executive"));
-        dummyUsers.add(new Users("Black Panther", "password", 24600, 0, "God"));
-        dummyUsers.add(new Users("Doctor Strange", "password", 12300, 5, "God"));
-        dummyUsers.add(new Users("Hawkeye", "password", 8800, 8, "God"));
-        dummyUsers.add(new Users("Groot", "password", 5600, 2, "God"));
-        dummyUsers.add(new Users("Ant-Man", "password", 4700, 3, "God"));
-        dummyUsers.add(new Users("Falcon", "password", 3200, 5, "God"));
-        dummyUsers.add(new Users("Vision", "password", 1400, 7, "God"));
-        dummyUsers.add(new Users("War-Machine", "password", 800, 8, "God"));
-        dummyUsers.add(new Users("Starlord", "password", 200, 0, "God"));
+        dummyUsers.add(new Users("Black Panther", "password", 24600, 0, "Manager"));
+        dummyUsers.add(new Users("Doctor Strange", "password", 12300, 5, "Manager"));
+        dummyUsers.add(new Users("Hawkeye", "password", 8800, 8, "Senior"));
+        dummyUsers.add(new Users("Groot", "password", 5600, 2, "Senior"));
+        dummyUsers.add(new Users("Ant-Man", "password", 4700, 3, "Graduate"));
+        dummyUsers.add(new Users("Falcon", "password", 3200, 5, "Graduate"));
+        dummyUsers.add(new Users("Vision", "password", 1400, 7, "Graduate"));
+        dummyUsers.add(new Users("War-Machine", "password", 800, 8, "Intern"));
+        dummyUsers.add(new Users("Starlord", "password", 200, 0, "Intern"));
 
         SessionData.mUserDatabase.mUserDao().insertMultipleUsers(dummyUsers);
         // Insert if new user

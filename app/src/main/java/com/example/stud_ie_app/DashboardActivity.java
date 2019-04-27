@@ -31,8 +31,8 @@ import java.util.List;
 public class DashboardActivity extends AppCompatActivity {
 
     private static final String TAG = "DashboardActivity";
-
     public static final String CATEGORY = "category";
+
     private TabLayout dashboardTabLayout;
     private AppBarLayout dashboardAppBarLayout;
     private ViewPager dashboardViewPager;
@@ -78,7 +78,7 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     private void setupUserId() {
-
+        // Sets up the userId card displayed at the top of the dashboard
         userAvatar = (ImageView) findViewById(R.id.user_avatar);
         userUsername = (TextView) findViewById(R.id.leaderboard_username);
         userRole = (TextView) findViewById(R.id.user_role);
@@ -92,7 +92,9 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     public void onLevelSelect(View view) {
-        // Identify Level
+        // Identifies which level is selected and launches the Quiz Activity for that level
+
+        // Create an index of all of the level cards;
         int[] levels = {
                 R.id.level_transport, // 0
                 R.id.level_beach, // 1
@@ -106,21 +108,22 @@ public class DashboardActivity extends AppCompatActivity {
                 R.id.level_astronomy // 9
         };
 
+        // Matches the card selected with the index of the level
         int levelId = 0;
         while (levelId < levels.length) {
             if (view.getId() == levels[levelId])
                 break;
             levelId++;
         }
-        System.out.println("Level Selected: " + QuestionBank.categories[levelId]);
 
+        // Launches Quiz Activity
         Intent intent = new Intent(this, QuestionActivity.class);
         intent.putExtra(CATEGORY, QuestionBank.categories[levelId]);
         startActivity(intent);
     }
 
     public void onUpdateRoleButtonClick(View view) {
-        Log.d(TAG, "onUpdateRole: pressed");
+        // Opens a dialog menu where the user can update their role/job title
         mDialog.setContentView(R.layout.popup_update_role);
 
         Button popupBack = (Button) mDialog.findViewById(R.id.popup_back);
@@ -139,7 +142,7 @@ public class DashboardActivity extends AppCompatActivity {
         updateRole.setText(SessionData.currentUser.getRole());
         updatePoints.setText(Integer.toString(SessionData.currentUser.getScore()));
 
-        // Setup RecyclerView
+        // Setup RecyclerView of their badges to choose from
         getUserBadges();
         roleBadgeRecyclerView = (RecyclerView) mDialog.findViewById(R.id.role_recyclerView);
         roleBadgeRecyclerView.setHasFixedSize(true);
@@ -147,6 +150,7 @@ public class DashboardActivity extends AppCompatActivity {
         roleBadgeRecyclerView.setLayoutManager(new LinearLayoutManager(mDialog.getContext(), LinearLayoutManager.HORIZONTAL, false));
         roleBadgeRecyclerView.setAdapter(recyclerViewAdapter);
 
+        // Closes dialog menu
         popupBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -154,6 +158,7 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
+        // Allow the user to preview the job title on the preview card
         popupApply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -163,6 +168,7 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
+        // Update the job title to the badge selected
         popupSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -183,6 +189,7 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     private void getUserBadges() {
+        // Gets all of the badges the user has
         List<UsrBadges> userBadges = SessionData.mUsrBadgesDatabase.mUsrBadgesDao().getAllBadgesByUser(SessionData.currentUser.getUserName());
         mBadges = new ArrayList<Badges>();
         for (int i = 0; i < userBadges.size(); i++) {
@@ -191,7 +198,7 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     public void onUpdateAvatarButtonClick(View view) {
-        Log.d(TAG, "onUpdateAvatar: pressed");
+        // Opens a dialog menu where the user can update their avatar
 
         mDialog.setContentView(R.layout.popup_update_avatar);
 
@@ -209,6 +216,7 @@ public class DashboardActivity extends AppCompatActivity {
         updateRole.setText(SessionData.currentUser.getRole());
         updatePoints.setText(Integer.toString(SessionData.currentUser.getScore()));
 
+        // Closes dialog menu
         popupBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -216,6 +224,7 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
+        // Update the user's avatar to the avatar selected
         popupSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -230,7 +239,7 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     public void onUpdatePasswordButtonClick(View view) {
-        Log.d(TAG, "onUpdatePassword: pressed");
+        // Opens a dialog menu where the user can update their password
 
         mDialog.setContentView(R.layout.popup_update_password);
 
@@ -253,7 +262,7 @@ public class DashboardActivity extends AppCompatActivity {
         popupSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Check password validity
+                // Check password validity before updating password
                 if (currentPassword.getText().toString().equals("") || newPasswordOne.getText().toString().equals("") || newPasswordTwo.getText().toString().equals("")) {
                     warningMessage.setTextColor(Color.RED);
                     warningMessage.setText("Please enter all fields");
@@ -267,6 +276,7 @@ public class DashboardActivity extends AppCompatActivity {
                     warningMessage.setText("Passwords do not match");
 
                 } else {
+                    // Credentials match and updates the password
                     warningMessage.setTextColor(Color.GREEN);
                     warningMessage.setText("Password succesfully changed");
                     SessionData.mUserDatabase.mUserDao().updatePassword(newPasswordOne.getText().toString(), SessionData.currentUser.getUserName());
@@ -280,18 +290,21 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     public void onLogoutButtonClick(View view) {
+        // Logs out of the app
         Log.d(TAG, "onLogoutButtonClick: pressed");
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 
     public void onOnbardingButtonClick(View view) {
+        // Returns to the onboarding slide
         Log.d(TAG, "onOnbardingButtonClick: pressed");
         Intent intent = new Intent(this, OnboardingActivity.class);
         startActivity(intent);
     }
 
     public void onAvatarSelectPress(View view) {
+        // Updates preview of the avatar based on selected avater
         int[] avatars = {
                 R.id.avatar_zero,
                 R.id.avatar_one,

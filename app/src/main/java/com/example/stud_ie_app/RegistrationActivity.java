@@ -33,6 +33,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
     public void onSubmitButtonPress(View view) {
 
+        // Error checking, making sure fields are correct
         if(newUsername.getText().toString().equals("")) {
             registrationErrorMessage.setText("Please fill out the username field");
         } else if (newPasswordOne.getText().toString().equals("") || newPasswordTwo.getText().toString().equals("")) {
@@ -42,9 +43,9 @@ public class RegistrationActivity extends AppCompatActivity {
         } else if (SessionData.mUserDatabase.mUserDao().fetchOneUserByUserName(newUsername.getText().toString()) != null){
             registrationErrorMessage.setText("Username taken");
         } else{
+            // Correct credentials, passes username and password to page 2 of the registration process
             System.out.println(String.format("LOGIN DETAILS PASSED \nUsername: %s \nPassword: %s \nPasswrod: %s",
                     newUsername.getText(), newPasswordOne.getText(), newPasswordTwo.getText()));
-
             Intent intent = new Intent(this, RegistrationTwoActivity.class);
             intent.putExtra(NEW_USERNAME, newUsername.getText().toString());
             intent.putExtra(NEW_PASSWORD, newPasswordOne.getText().toString());

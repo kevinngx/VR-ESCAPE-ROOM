@@ -35,7 +35,7 @@ public class SentencesRecyclerViewAdapter extends RecyclerView.Adapter<Sentences
     @Override
     public void onBindViewHolder(@NonNull SentenceViewHolder sentenceViewHolder, int position) {
         sentenceViewHolder.sentence.setText(mData.get(position));
-        sentenceViewHolder.sentenceNumber.setText(Integer.toString(position));
+        sentenceViewHolder.sentenceNumber.setText(Integer.toString((position + 1)));
     }
 
     @Override
