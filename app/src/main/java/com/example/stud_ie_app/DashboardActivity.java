@@ -1,7 +1,6 @@
 package com.example.stud_ie_app;
 
 import android.app.Dialog;
-import android.arch.persistence.room.Database;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -10,12 +9,9 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,7 +23,6 @@ import com.example.stud_ie_app.DashboardFragments.FragmentQuiz;
 import com.example.stud_ie_app.DashboardFragments.FragmentUser;
 import com.example.stud_ie_app.DatabaseClasses.ImageBank;
 import com.example.stud_ie_app.DatabaseClasses.SessionData;
-import com.example.stud_ie_app.RecyclerViewAdapters.BadgeRecyclerViewAdapter;
 import com.example.stud_ie_app.RecyclerViewAdapters.RoleBadgesRecyclerViewAdapter;
 
 import java.util.ArrayList;
@@ -55,7 +50,6 @@ public class DashboardActivity extends AppCompatActivity {
     TextView updateRole;
     TextView updatePoints;
     int selectedAvatar = SessionData.currentUser.getAvatar();
-    String selectedRole = SessionData.currentUser.getRole();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +96,7 @@ public class DashboardActivity extends AppCompatActivity {
         int[] levels = {
                 R.id.level_transport, // 0
                 R.id.level_beach, // 1
-                R.id.level_sports, // 2
+                R.id.level_circus, // 2
                 R.id.level_jobs, // 3
                 R.id.level_weather, // 4
                 R.id.level_nature, // 5

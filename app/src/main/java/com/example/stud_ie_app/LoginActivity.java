@@ -27,8 +27,10 @@ public class LoginActivity extends AppCompatActivity {
         password = findViewById(R.id.passwordField);
         errorMsg = findViewById(R.id.errorMessage);
 
-//        CreateData.populateBadgesDatabase();
-//        CreateData.populateUserBadges();
+        // Populates default users
+        CreateData.populateUsers();
+        CreateData.populateBadgesDatabase();
+        CreateData.populateUserBadges();
 
     }
 

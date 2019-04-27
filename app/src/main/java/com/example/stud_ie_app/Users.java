@@ -1,6 +1,7 @@
 package com.example.stud_ie_app;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
@@ -14,18 +15,26 @@ public class Users {
     @PrimaryKey
     private String userName;
 
-
     private String password;
     private int score;
     private int avatar;
     private String role;
 
+    @Ignore
     public Users(String userName, String password, int avatar) {
             this.userName = userName;
             this.password = password;
             this.score = 0;
             this.role = "Intern";
             this.avatar = avatar;
+    }
+
+    public Users(@NonNull String userName, String password, int score, int avatar, String role) {
+        this.userName = userName;
+        this.password = password;
+        this.score = score;
+        this.avatar = avatar;
+        this.role = role;
     }
 
     public String getUserName() {

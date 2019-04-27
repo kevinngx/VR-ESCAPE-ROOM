@@ -25,7 +25,7 @@ public class ImageBank {
             R.drawable.category_beach, // 6
             R.drawable.category_transport, //7
             R.drawable.category_animals, //8
-            R.drawable.category_sports, //9
+            R.drawable.category_circus, //9
             R.drawable.category_jobs, //10
             R.drawable.category_weather, //11
             R.drawable.category_nature, //12
@@ -41,5 +41,18 @@ public class ImageBank {
             R.drawable.badge_two_faced, //22
             R.drawable.badge_cyber_security_specialist, //23
             R.drawable.badge_the_prodigy //24
+    };
+
+    public static int[] levelImages = {
+            R.drawable.category_transport, //0
+            R.drawable.category_beach, //1
+            R.drawable.category_circus, //2
+            R.drawable.category_jobs, //3
+            R.drawable.category_weather, //4
+            R.drawable.category_nature, //5
+            R.drawable.category_music, //6
+            R.drawable.category_exercise, //7
+            R.drawable.category_politics, //8
+            R.drawable.category_astronomy //9
     };
 }

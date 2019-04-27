@@ -64,18 +64,16 @@ public class RegistrationTwoActivity extends AppCompatActivity {
         // Update Employee id_card
         id_image.setImageResource(ImageBank.avatars[newAvatar]);
 
-
     }
 
     public void onSubmitButtonPress(View view) {
-
         //create user
         new Thread(new Runnable() {
             @Override
             public void run() {
                 Bundle bundle = getIntent().getExtras();
                 Users user = new Users(bundle.getString(RegistrationActivity.NEW_USERNAME), bundle.getString(RegistrationActivity.NEW_PASSWORD), newAvatar );
-                SessionData.mUserDatabase.mUserDao () . insertOnlySingleUser (user);
+                SessionData.mUserDatabase.mUserDao().insertOnlySingleUser(user);
                 SessionData.currentUser = user;
             }
         }) .start();

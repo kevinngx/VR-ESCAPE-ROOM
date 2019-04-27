@@ -32,7 +32,6 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     public void onSubmitButtonPress(View view) {
-        //TODO: Add Login Checks
 
         if(newUsername.getText().toString().equals("")) {
             registrationErrorMessage.setText("Please fill out the username field");
@@ -51,7 +50,6 @@ public class RegistrationActivity extends AppCompatActivity {
             intent.putExtra(NEW_PASSWORD, newPasswordOne.getText().toString());
             startActivity(intent);
         }
-
 
     }
 

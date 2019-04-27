@@ -22,6 +22,7 @@ import com.example.stud_ie_app.RecyclerViewAdapters.SentencesRecyclerViewAdapter
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class QuestionActivity extends AppCompatActivity {
@@ -40,9 +41,13 @@ public class QuestionActivity extends AppCompatActivity {
 
     String category;
     ArrayList<String> wordBank;
+    ArrayList<String> sentenceBank;
     ArrayList<String> wordSentences;
     int currentQuestion = 0;
     int currentAnswer;
+    int correctInSession = 0;
+    int consecutiveCorrect = 0;
+    int consecutiveWrong = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +79,7 @@ public class QuestionActivity extends AppCompatActivity {
         questionCategory.setText(category);
         Log.d(TAG, "onCreate: Category is: " + category);
         wordBank = QuestionBank.getWordsBank(category);
+        sentenceBank = QuestionBank.getSentencesBank(category);
         Log.d(TAG, "onCreate: Word Bank downloaded");
         refreshQuestion();
 
@@ -87,8 +93,9 @@ public class QuestionActivity extends AppCompatActivity {
         seeWordList.setEnabled(false);
         pointsCard.setVisibility(View.INVISIBLE);
         String word = wordBank.get(currentQuestion);
-        wordSentences = getWordSentences(word);
-        displaySentence.setText(getSentenceWithoutWord(wordSentences.get(0), word));
+        displaySentence.setText(getSentenceWithoutWord(sentenceBank.get(currentQuestion), word));
+//        wordSentences = getWordSentences(word);
+//        displaySentence.setText(getSentenceWithoutWord(wordSentences.get(0), word));
         getOptions(word);
 
     }
@@ -106,32 +113,49 @@ public class QuestionActivity extends AppCompatActivity {
 
     // Get synonyms from the API and display it to the user
     private void getOptions(String word) {
-        ArrayList<String> synonyms;
+//        ArrayList<String> synonyms;
         ArrayList<String> optionText = new ArrayList<>();
 
-        // Set the current answer
-        try {
-            synonyms = OxfordApiHelper.getSynonyms(word);
+//        // Set the current answer
+//        try {
+//            synonyms = OxfordApiHelper.getSynonyms(word);
+//
+//            optionText.add(word);
+//            for (int i = 0; i < 3; i++) {
+//                optionText.add(synonyms.get(i));
+//            }
+//
+//            Collections.shuffle(optionText);
+//
+//            for (int i = 0; i < 4; i++) {
+//                options[i].setText(optionText.get(i));
+//                if (optionText.get(i).equals(word)) {
+//                    currentAnswer = i;
+//                }
+//            }
+//
+//        } catch (ExecutionException e) {
+//            e.printStackTrace();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
 
-            optionText.add(word);
-            for (int i = 0; i < 3; i++) {
-                optionText.add(synonyms.get(i));
-            }
 
-            Collections.shuffle(optionText);
-
-            for (int i = 0; i < 4; i++) {
-                options[i].setText(optionText.get(i));
-                if (optionText.get(i).equals(word)) {
-                    currentAnswer = i;
-                }
-            }
-
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        ArrayList<String> otherOptions = QuestionBank.getOptionsFromWordBank(category, word);
+        for (int i = 0; i < 3; i++) {
+            optionText.add(otherOptions.get(i));
         }
+
+        optionText.add(word);
+        Collections.shuffle(optionText);
+
+        for (int i = 0; i < 4; i++) {
+            options[i].setText(optionText.get(i));
+            if (optionText.get(i).equals(word)) {
+                currentAnswer = i;
+            }
+        }
+
     }
 
     private String getSentenceWithoutWord(String sentence, String word) {
@@ -142,8 +166,12 @@ public class QuestionActivity extends AppCompatActivity {
         regex = String.format("\\s*\\b%ss\\b\\s*", word);
         result = result.replaceAll(regex, " [    ?    ] ");
 
-        // Will remove suffix of 's'
+        // Will remove suffix of 'd'
         regex = String.format("\\s*\\b%sd\\b\\s*", word);
+        result = result.replaceAll(regex, " [    ?    ] ");
+
+        // Will remove suffix of 'd'
+        regex = String.format("\\s*\\b%sing\\b\\s*", word);
         result = result.replaceAll(regex, " [    ?    ] ");
 
         System.out.println(result);
@@ -168,17 +196,74 @@ public class QuestionActivity extends AppCompatActivity {
 
     private void markAnswer(int answer) {
         if (answer == currentAnswer) {
+            correctInSession++;
+            consecutiveCorrect++;
+            consecutiveWrong = 0;
             int score = QuestionBank.getScore(category);
-            checkLevelBadge(score);
+            checkScoreBadges(score);
+            checkCategoryBadges();
+            checkSessionBadges();
             pointsAllocation.setText(String.format("+%s points!", Integer.toString(score)));
             SessionData.currentUser.setScore(SessionData.currentUser.getScore() + score);
             SessionData.mUserDatabase.mUserDao().updateScore(score, SessionData.currentUser.getUserName());
         } else {
             pointsAllocation.setText("Incorrect Answer");
+            consecutiveCorrect = 0;
+            consecutiveWrong++;
         }
     }
 
-    private void checkLevelBadge(int score) {
+    private void checkSessionBadges() {
+        if (correctInSession == 10) {
+            giveBadge(17);
+        }
+        if (consecutiveCorrect == 5) {
+            giveBadge(18);
+        }
+
+        if (consecutiveWrong == 5) {
+            giveBadge(21);
+        }
+    }
+
+    private void checkCategoryBadges() {
+        if (correctInSession == 5) {
+            switch (category) {
+                case "Transport":
+                    giveBadge(7);
+                    break;
+                case "Beach":
+                    giveBadge(6);
+                    break;
+                case "Circus":
+                    giveBadge(9);
+                    break;
+                case "Jobs":
+                    giveBadge(10);
+                    break;
+                case "Weather":
+                    giveBadge(11);
+                    break;
+                case "Nature":
+                    giveBadge(12);
+                    break;
+                case "Music":
+                    giveBadge(13);
+                    break;
+                case "Exercise":
+                    giveBadge(14);
+                    break;
+                case "Politics":
+                    giveBadge(15);
+                    break;
+                case "Astronomy":
+                    giveBadge(16);
+                    break;
+            }
+        }
+    }
+
+    private void checkScoreBadges(int score) {
         // This will check the promotion related badges
         if (SessionData.currentUser.getScore() < 1000 && (SessionData.currentUser.getScore() + score) >= 1000) {
             giveBadge(2); // Promoted to Graduate
@@ -199,6 +284,10 @@ public class QuestionActivity extends AppCompatActivity {
     }
 
     private void giveBadge(int badgeId) {
+        // Does not give badge if the user already has it
+        if (badgeExists(badgeId)) {
+            return;
+        }
         Badges badge = SessionData.mBadgeDatabase.mBadgeDao().fetchBadgeByID(badgeId);
         ImageView badgeImage;
         TextView badgeTitle;
@@ -228,6 +317,18 @@ public class QuestionActivity extends AppCompatActivity {
 
         mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
         mDialog.show();
+    }
+
+    private boolean badgeExists(int badgeId) {
+        //todo: check if the user already has the badge
+        boolean userHasBadge = false;
+        List<UsrBadges> userBadges = SessionData.mUsrBadgesDatabase.mUsrBadgesDao().getAllBadgesByUser(SessionData.currentUser.getUserName());
+        for (int i = 0; i < userBadges.size(); i++) {
+            if (userBadges.get(i).getBadgeID() == badgeId) {
+                userHasBadge = true;
+            }
+        }
+        return userHasBadge;
     }
 
     private int getAnswerSelected(View selectedCard) {
@@ -270,6 +371,7 @@ public class QuestionActivity extends AppCompatActivity {
 
     public void onShowSentenceList(View view) {
         // Opens a dialog window containing sentence list
+        wordSentences = getWordSentences(wordBank.get(currentQuestion));
         TextView popupWord;
         Button popupBack;
         RecyclerView sentencesRecyclerView;

@@ -29,7 +29,6 @@ public class Badges {
         this.description = description;
         this.icon = icon;
 
-
     }
 
     public int getBadgeID() {
