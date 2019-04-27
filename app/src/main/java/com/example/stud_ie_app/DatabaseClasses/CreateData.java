@@ -131,7 +131,7 @@ public class CreateData {
         badgesList.add(new Badges(15, "Politics Guru", "5 correct in one session: Politics", 15));
         badgesList.add(new Badges(16, "Astronomy Guru", "5 correct in one session: Astronomy", 16));
         badgesList.add(new Badges(17, "Hustler", "10 questions in one sitting", 17));
-        badgesList.add(new Badges(18, "Genius", "Got 5 questions correct in a row! You're quite the genius aren't you.", 18));
+        badgesList.add(new Badges(18, "Genius", "Got 3 questions correct in a row! You're quite the genius aren't you.", 18));
         badgesList.add(new Badges(19, "LinkedIn Stalker", "Check out the Leaderboard! ", 19));
         badgesList.add(new Badges(20, "Curious Learner", "Learned about other usages for a word", 20));
         badgesList.add(new Badges(21, "Fired", "Get 5 questions incorrect in a row", 21));

@@ -217,7 +217,8 @@ public class QuestionActivity extends AppCompatActivity {
         if (correctInSession == 10) {
             giveBadge(17);
         }
-        if (consecutiveCorrect == 5) {
+
+        if (consecutiveCorrect == 3) {
             giveBadge(18);
         }
 
@@ -407,9 +408,27 @@ public class QuestionActivity extends AppCompatActivity {
             currentQuestion++;
             refreshQuestion();
         } else {
-            // TODO: Level Complete
-            Intent intent = new Intent(this, DashboardActivity.class);
-            startActivity(intent);
+            TextView correctAnswers;
+            TextView incorrectAnswers;
+            Button finishLevel;
+
+            mDialog.setContentView(R.layout.popup_level_finished);
+            correctAnswers = (TextView) mDialog.findViewById(R.id.level_summary_correct);
+            incorrectAnswers = (TextView) mDialog.findViewById(R.id.level_summary_incorrect);
+            finishLevel = (Button) mDialog.findViewById(R.id.finish_level);
+
+            correctAnswers.setText(Integer.toString(correctInSession));
+            incorrectAnswers.setText(Integer.toString(wordBank.size() - correctInSession));
+
+            finishLevel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mDialog.getContext(), DashboardActivity.class);
+                    startActivity(intent);
+                }
+            });
+            mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+            mDialog.show();
         }
     }
 
